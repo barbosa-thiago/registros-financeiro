@@ -1,43 +1,23 @@
-package com.example.sintegracebusca.controller;
+package com.example.sintegracebusca.component;
 
-import com.example.sintegracebusca.domain.Cliente;
-import com.example.sintegracebusca.domain.Income;
-import com.example.sintegracebusca.repository.ClienteRepository;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
-@RestController
-@RequestMapping("photo")
-@Slf4j
-@RequiredArgsConstructor
-public class PhotoController {
+@Component
+public class SintegraComponent {
 
-    private final ClienteRepository clienteRepository;
-
-    @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Income> save(Income income) {
-
-        log.info("payload {}", income);
-
-        return ResponseEntity.ok(income);
-    }
-
-    @GetMapping("/{cnpj}")
-    public ResponseEntity<?> getClient(@PathVariable String cnpj) {
+    public Map<String, String> buscaCliente(String cnpj) {
         var map = new HashMap<String, String>();
         map.put("tipodocumento", "2");
         map.put("numcnpjcgf", cnpj);
 
-        var url = "https://internet-consultapublica.apps.sefaz.ce.gov.br/sintegra/consultar?tipdocumento={tipodocumento}&numcnpjcgf={numcnpjcgf}";
+        var url = "https://consultapublica.sefaz.ce.gov.br/sintegra/consultar?tipdocumento={tipodocumento}&numcnpjcgf={numcnpjcgf}";
         var restTemplate = new RestTemplate();
         var htmlResponse = restTemplate.getForObject(url, String.class, map);
 
@@ -73,11 +53,6 @@ public class PhotoController {
             finalResult.put(variables.get(i), finalValues.get(i));
         }
 
-        return ResponseEntity.ok(finalResult);
-    }
-
-    @GetMapping("/client")
-    public ResponseEntity<List<Cliente>> getClients() {
-        return ResponseEntity.ok(clienteRepository.findAll());
+        return finalResult;
     }
 }
