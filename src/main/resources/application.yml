@@ -1,0 +1,14 @@
+
+
+spring:
+  application:
+    name: sintegra-busca
+  jpa:
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+  datasource:
+    url: jdbc:firebirdsql:${DB_HOST}/${DB_PORT}:controle.db?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
