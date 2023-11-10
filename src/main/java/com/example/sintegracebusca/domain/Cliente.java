@@ -11,7 +11,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@SequenceGenerator(name = "INC_CLIENTE", sequenceName = "GEN_CLIENTE_ID")
+@SequenceGenerator(name = "INC_CLIENTE", sequenceName = "GEN_CLIENTE_ID", allocationSize = 1)
 public class Cliente implements Serializable {
 
     @Id
