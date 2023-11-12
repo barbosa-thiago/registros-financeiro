@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/styles/style.css}" rel="stylesheet" />
+</head>
+<body>
+<div class="result">
+    <h2>Cliente Registrado</h2>
+    <p th:text="'Cnpj: ' + ${cliente.cnpj}" />
+    <p th:text="'Razão Social: ' + ${cliente.razaoSocial}" />
+    <p th:text="'Inscrição Estadual: ' + ${cliente.inscricaoEstadual}" />
+    <p th:text="'Cidade: ' + ${cliente.municipio}" />
+    <p th:text="'Logradouro: ' + ${cliente.logradouro}" />
+    <p th:text="'Cep: ' + ${cliente.cep}" />
+    <p th:text="'Complemento: ' + ${cliente.complemento  }" />
+    <p th:text="'Início de Atividade: ' + ${cliente.inicioAtividade}" />
+    <p th:text="'CNAE: ' + ${cliente.cnae}" />
+    <p th:text="'Telefone: ' + ${cliente.telefone}" />
+
+    <a href="/sintegra">CONSULTE OUTRO CNPJ</a>
+
+</div>
+
+</body>
+</html>

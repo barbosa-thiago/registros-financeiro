@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/styles/style.css}" rel="stylesheet" />
+</head>
+<header class="header">
+    <h1 id="title" class="text-center">Buscador Sintegra</h1>
+    <p id="description" class="text-center">Válido para estado do Ceará</p>
+</header>
+<body>
+<form action="#" th:action="@{/sintegra}" th:object="${income}" method="post">
+    <div>
+        <label th:text="cnpj" />
+        <input type="text" th:field="*{cnpj}" />
+    </div>
+
+            <input type="submit" value="Buscar" />
+</form>
+</body>
+</html>

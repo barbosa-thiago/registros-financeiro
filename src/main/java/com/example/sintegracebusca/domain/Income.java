@@ -8,6 +8,5 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class Income implements Serializable {
-    String nome;
-    String telefone;
+    String cnpj;
 }

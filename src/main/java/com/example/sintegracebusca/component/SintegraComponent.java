@@ -1,18 +1,18 @@
 package com.example.sintegracebusca.component;
 
+import com.example.sintegracebusca.domain.Cliente;
+import org.jsoup.Jsoup;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Component
 public class SintegraComponent {
 
-    public Map<String, String> buscaCliente(String cnpj) {
+    public Cliente buscaCliente(String cnpj) {
         var map = new HashMap<String, String>();
         map.put("tipodocumento", "2");
         map.put("numcnpjcgf", cnpj);
@@ -21,38 +21,69 @@ public class SintegraComponent {
         var restTemplate = new RestTemplate();
         var htmlResponse = restTemplate.getForObject(url, String.class, map);
 
-        var data = htmlResponse.split("<b>IDENTIFICAÇÃO</b></th>")[1]
-            .split("<th><b>INFORMAÇÕES COMPLEMENTARES</b></th>")[0];
-
-        var variableNames = new ArrayList<String>();
-
-        for (String temp : data.split("<th>")) {
-            variableNames.addAll(List.of(temp.split("</th>")));
+        if(htmlResponse.contains("Nenhum contribuinte encontrado")) {
+            return null;
         }
+        var document = Jsoup.parse(htmlResponse);
+        var dadosSintegra = document.select("#dadossintegra")
+            .select("td")
+            .eachText();
 
-        List<String> variables = variableNames.stream()
-            .filter(value -> !value.contains("<") && !value.contains("\n"))
-            .collect(Collectors.toList());
+        var enderecoSintegra = document.select("#enderecosintegara").first()
+            .select("td")
+            .eachText();
 
-        var finalValues = new ArrayList<String>();
+        var numeroComplemento = document.select("#enderecosintegara").first()
+            .select("tr")
+            .get(2)
+            .select("td")
+            .eachText();
 
-        variableNames.stream()
-            .filter(value -> value.contains("<"))
-            .forEach(v -> {
-                if (v.contains("<td>")) {
-                    for (String temp : v.split("<td>")) {
-                        var finalValue = temp.split("</td>")[0];
-                        if(!finalValue.contains("\n"))
-                            finalValues.add(temp.split("</td>")[0]);
-                    }
-                }
-            });
+        var bairro = document.select("#enderecosintegara").first()
+            .select("tr")
+            .get(3)
+            .select("td")
+            .eachText();
 
-        var finalResult = new HashMap<String, String>();
-        for (int i = 0; i < variables.size(); i++) {
-            finalResult.put(variables.get(i), finalValues.get(i));
-        }
+        var municipioUf = document.select("#enderecosintegara").first()
+            .select("tr")
+            .get(4)
+            .select("td")
+            .eachText();
 
-        return finalResult;
+        var cepTelefone = document.select("#enderecosintegara").first()
+            .select("tr")
+            .get(5)
+            .select("td")
+            .eachText();
+
+
+
+        List<String> outrosDados = document.select("#enderecosintegara").last()
+            .select("td")
+            .eachText();
+
+        var complemento = numeroComplemento.size() > 1 ?
+            numeroComplemento.get(1) : null;
+
+        var cliente = Cliente.builder()
+
+            .cnpj(dadosSintegra.get(0))
+            .inscricaoEstadual(dadosSintegra.get(1))
+            .razaoSocial(dadosSintegra.get(2))
+            .logradouro(enderecoSintegra.get(0))
+            .numero(numeroComplemento.get(0))
+            .complemento(complemento)
+            .bairro(bairro.get(0))
+            .municipio(municipioUf.get(0))
+            .uf(municipioUf.get(1))
+            .cep(cepTelefone.get(0))
+            .telefone(cepTelefone.get(1))
+            .cnae(outrosDados.get(0))
+            .inicioAtividade(LocalDate.parse(outrosDados.get(3)))
+            .build();
+
+
+        return cliente;
     }
 }

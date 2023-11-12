@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static java.util.Objects.nonNull;
+
 @RequiredArgsConstructor
 @Service
 public class ClienteService {
@@ -17,25 +19,15 @@ public class ClienteService {
 
     public Cliente save(String cnpj) {
 
-        var cliente = clienteRepository.findByCnpj(cnpj).orElseGet(() -> {
-            var clienteMap = sintegraComponent.buscaCliente(cnpj);
+        return clienteRepository.findByCnpj(cnpj).orElseGet(() -> {
+                var client = sintegraComponent.buscaCliente(cnpj);
 
-            return Cliente.builder()
-                .complemento(clienteMap.get("Complemento"))
-                .razaoSocial(clienteMap.get("Nome/Razão Social"))
-                .logradouro(clienteMap.get("Logradouro"))
-                .cnpj(cnpj)
-                .telefone(clienteMap.get("Telefone"))
-                .bairro(clienteMap.get("Bairro"))
-                .cep(clienteMap.get("CEP"))
-                .municipio(clienteMap.get("Município"))
-                .numero(clienteMap.get("Número"))
-                .inscricaoEstadual(clienteMap.get("Inscrição Estadual:"))
-                .uf(clienteMap.get("UF"))
-                .build();
+                if (nonNull(client))
+                    client = clienteRepository.save(client);
 
-        });
-        return clienteRepository.save(cliente);
+                return client;
+            }
+        );
 
     }
 
