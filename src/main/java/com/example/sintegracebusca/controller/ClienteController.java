@@ -29,7 +29,7 @@ public class ClienteController {
     @GetMapping("/sintegra")
     public String sintegra(Model model) {
         model.addAttribute("income", new Income());
-        return "sintegra";
+        return "sintegra/sintegra";
     }
 
 
@@ -39,7 +39,7 @@ public class ClienteController {
         if(isNull(cliente))
             return "erro";
         model.addAttribute("cliente", cliente);
-        return "result";
+        return "sintegra/result";
     }
 
     @GetMapping("/client")
