@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Sistema de cadastro de compra e pagamento</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet"href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"crossorigin="anonymous">
+
+    <link th:href="@{/styles/style.css}" rel="stylesheet" />
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet" />
+</head>
+<body>
+<div th:include="fragments/navbar :: header"></div>
+<div class="result">
+    <h3>Compra Registrada</h3>
+    <p th:text="'Valor: ' + ${compra.valor}" />
+    <p th:text="'Descrição: ' + ${compra.descricao}" />
+    <p th:text="'Data: ' + ${compra.dataCompra}" />
+    <p th:text="'Fornecedor: ' + ${compra.fornecedor}" />
+
+    <a href="/compras">Voltar ao inicio</a>
+
+</div>
+
+<div class="result">
+    <a class="btn" href="/compras/list">Ver compras do mês</a>
+</div>
+
+</body>
+</html>

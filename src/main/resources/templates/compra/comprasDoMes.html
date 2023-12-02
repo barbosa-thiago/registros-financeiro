@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Sistema de cadastro de compra e pagamento</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet"href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"crossorigin="anonymous">
+    <link th:href="@{/styles/style.css}" rel="stylesheet" />
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet" />
+</head>
+<body>
+<div th:include="fragments/navbar :: header"></div>
+<div class="result">
+    <a class="novo-registro btn btn-light mb-3 p-3" href="/compras">Nova compra</a>
+
+    <h3>Compras Registradas: </h3>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <td>Fornecedor</td>
+            <td>Valor</td>
+            <td>Descricao</td>
+            <td>Data</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${compras.empty}">
+            <td colspan="4">Sem compras</td>
+        </tr>
+        <tr th:each="compra : ${compras}">
+            <td th:text="${compra.fornecedor}"></td>
+            <td th:text="${compra.valor}"></td>
+            <td th:text="${compra.descricao}"></td>
+            <td th:text="${compra.dataCompra}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
