@@ -1,13 +1,9 @@
-label {
-    display: block;
-    margin: 0.5rem 0;
-}
+
 body {
     width: 100%;
     height: 100vh;
-    background-color: #1b1b32;
-    margin: 0;
-    color: #f5f6f7;
+    margin-top: 15vh;
+    color: #2f3e8f;
     font-family: 'Poppins', sans-serif;
     font-size: 1rem;
     font-weight: 400;
@@ -17,14 +13,9 @@ header {
     margin: auto;
 }
 
-.text-center {
-    margin: 1em auto;
-    text-align: center;
-}
-
 form {
-    width: 60vw;
-    max-width: 500px;
+    width: 70vw;
+    max-width: 650px;
     min-width: 300px;
     margin: 0 auto;
     padding-bottom: 2em;
@@ -41,12 +32,19 @@ select {
     margin: 10px 0 0 0;
     width: 100%;
     min-height: 2em;
+    border-radius: 2px;
 }
 
 input, textarea {
-    background-color: #0a0a23;
-    border: 1px solid #0a0a23;
-    color: #ffffff;
+    background-color: #fff;
+    border: 1px solid darkslategray;
+    color: black;
+    border-color: #fff;
+}
+
+.datepicker, .valor {
+    width: 40%;
+    min-width: 200px;
 }
 
 .inline {
@@ -56,19 +54,19 @@ input, textarea {
 }
 
 .result {
-    width: 70vw;
-    max-width: 500px;
-    min-width: 300px;
+    width: 85vw;
+    max-width: 850px;
+    min-width: 350px;
     margin: 3rem auto;
 }
 
 .result a {
-    color: white;
+    color: #3f5efb;
     text-decoration: none;
     font-weight: bold;
 }
 .result a:hover {
-    color: gainsboro;
+    color: #2f3e8f;
 }
 
 input[type="submit"] {
@@ -77,10 +75,79 @@ input[type="submit"] {
     margin: 1em auto;
     height: 2em;
     font-size: 1.1rem;
-    background-color: #3b3b4f;
-    border-color: white;
+    background-color: #fff;
+    border-color: darkslategray;
+}
+
+input[type="button"] {
+    display: flex;
+    width: 30%;
+    margin: 1em auto;
+    height: 2em;
+    font-size: 1.1rem;
+    background-color: #fff;
+    border-color: darkslategray;
 }
 
 form:last-child {
     padding-bottom: 2em;
+}
+
+/*body {*/
+/*    background-color: #3b3b4f;*/
+/*}*/
+
+ul li {
+    list-style: none;
+}
+
+.insert-produto {
+    display: grid;
+    grid-template-columns: 5fr repeat(3, 1fr);
+    grid-column-gap: 1em;
+    justify-content: space-between;
+
+}
+
+table {
+    width: 100%;
+    margin: 20px auto;
+    table-layout: auto;
+}
+
+.fixed {
+    table-layout: fixed;
+}
+thead tr {
+    font-weight: bold;
+}
+
+table,
+td,
+th {
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 10px;
+    border: solid 1px;
+    text-align: center;
+}
+
+.novo-registro:hover {
+    color: #3f5efb;
+    outline: none;
+    position: relative;
+}
+
+#produtos {
+    padding: 15px;
+}
+
+.foi-pago {
+    color: darkgreen;
+}
+.nao-foi-pago {
+    color: darkred;
 }

@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Sistema de cadastro de compra e pagamento</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet"href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"crossorigin="anonymous">
+    <link th:href="@{/styles/style.css}" rel="stylesheet" />
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet" />
+
+</head>
+<div th:include="fragments/navbar :: header"></div>
+    <h2 id="title" class="text-center">Buscador Sintegra</h2>
+    <p id="description" class="text-center">Válido para estado do Ceará</p>
+<body>
+
+<form action="#" th:action="@{/sintegra}" th:object="${income}" method="post">
+    <div class="mb-3">
+        <label class="form-label" th:text="CNPJ" />
+        <input class="form-control" type="text" th:field="*{cnpj}" />
+    </div>
+
+    <div class="text-center mb-3">
+        <button class="btn" type="submit">Buscar</button>
+    </div>
+</form>
+</body>
+</html>
