@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Sistema de cadastro de compra e pagamento</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+          integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyJq25+5tihpR6i5k2xp3bFq5VVDD02vZl"
+          crossorigin="anonymous">
+
+    <link th:href="@{/styles/style.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet"/>
+
+</head>
+<body>
+<div th:replace="fragments/navbar :: header"></div>
+
+<div class="result">
+    <a class="novo-registro btn btn-light mb-3 p-3" href="/agendamentos">Novo agendamento</a>
+
+    <h3>Agendamentos Registrados: </h3>
+
+
+    <ul class="container">
+        <li th:each="entry: ${somaMap}">
+            <div class="d-flex justify-content-between border-bottom">
+
+                <h3 class="d-inline"
+                    th:text="${#temporals.format(entry.value.dataTotalPagamentos.data, 'dd/MMM')}"></h3>
+                <p class="font-weight-bold" th:text="'Total: ' + ${entry.value.dataTotalPagamentos.somaDoDia}"></p>
+            </div>
+            <ul class="row">
+
+                <li class="m-2 w-20 col-3 text-center" th:each="value: ${entry.value.agendamentos}">
+                    <div th:class="${value.pago} ? 'foi-pago border border-success' : 'nao-foi-pago border border-danger'"
+                         th:if="value">
+                        <span th:text="${value.fornecedor}"></span><br/>
+                        <span th:text="${value.valor}"></span><br/>
+
+                        <form class="d-inline" th:action="@{/agendamentos/update/{id}(id=${value.id})}"
+                              method="post">
+                            <input type="hidden" name="pago" th:value="${!value.pago}"/>
+                            <button class="btn btn-primary  " type="submit">Ok</button>
+                        </form>
+                    </div>
+                </li>
+                <li class="m-2 w-20 col-3">
+                    <button type="button" data-bs-toggle="modal"
+                            data-bs-target="#meumodal"
+                            onclick="openModal(this)"
+                            th:attr="data-agendamento-date=${entry.value.dataTotalPagamentos.data}"
+                            class="novo-registro btn btn-light p-3 m-4">
+                        <i class="fas fa-heart"></i>Adicionar
+                    </button>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+</div>
+
+<div th:insert="fragments/agendamentomodal :: div"></div>
+
+<script th:inline="javascript">
+    function openModal(button) {
+        document.getElementById('data-ag').value = button.getAttribute('data-agendamento-date');
+    }
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

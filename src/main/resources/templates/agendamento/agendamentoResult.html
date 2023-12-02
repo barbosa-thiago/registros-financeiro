@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Sistema de cadastro de agendamento e pagamento</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet"href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"crossorigin="anonymous">
+
+    <link th:href="@{/styles/style.css}" rel="stylesheet" />
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet" />
+</head>
+<body>
+<div th:include="fragments/navbar :: header"></div>
+<div class="result">
+    <h3>Agendamento Registrado</h3>
+    <p th:text="'Valor: ' + ${agendamento.valor}" />
+    <p th:text="'Data: ' + ${#temporals.format(agendamento.dataPagamento, 'dd/MM/yy')}" />
+    <p th:text="'Fornecedor: ' + ${agendamento.fornecedor}" />
+
+    <a class="btn" href="/agendamentos">Voltar ao inicio</a>
+
+</div>
+
+<div class="result">
+    <a class="btn" href="/agendamentos/list">Ver agendamentos do mês</a>
+</div>
+
+</body>
+</html>
