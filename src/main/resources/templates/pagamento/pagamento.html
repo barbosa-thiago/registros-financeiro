@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Sistema de cadastro de compra e pagamento</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"crossorigin="anonymous">
+    <link th:href="@{/styles/style.css}" rel="stylesheet" />
+    <link th:href="@{/styles/navbar.css}" rel="stylesheet" />
+
+</head>
+
+<body>
+<div th:include="fragments/navbar :: header"></div>
+<h2 id="title" class="text-center">Cadastro de Pagamentos</h2>
+
+<form action="#" th:action="@{/pagamentos}" th:object="${pagamento}" method="post">
+    <div class="mb-3">
+<!--        <label class="form-label" th:text="${#numbers.formatCurrency(valor)}" />-->
+        <label class="form-label" th:text="Valor" />
+        <input class="form-control" type="text" required="true" th:field="*{valor}" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label" th:text="Descricao" />
+        <input class="form-control" type="text" required="true" th:field="*{descricao}" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label" th:text="Tipo" />
+        <select class="form-select" id="tipoList" th:field="*{tipo}" name="Tipo">
+            <option th:each="option : ${T(com.example.sintegracebusca.enums.TipoPagamento).values()}"
+                    th:value="${option}" th:text="${option}"></option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" th:text="Compra"/>
+        <select class="form-select mt-3" id="compraList" name="Compra">
+            <option value="0">selecione a compra</option>
+            <option th:each="compra : ${compras}"
+                    th:value="${compra.id}" th:text="${compra.fornecedor +' - '+ compra.valor +' - '+ compra.dataCompra}"></option>
+        </select>
+    </div>
+    <div class="text-center m-5">
+        <button class="btn btn-primary" type="submit">Salvar</button>
+    </div>
+</form>
+</body>
+</html>
