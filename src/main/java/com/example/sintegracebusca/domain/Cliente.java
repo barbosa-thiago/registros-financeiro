@@ -19,37 +19,37 @@ public class Cliente implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "INC_CLIENTE")
     Long id;
 
-    @Column(name = "cnpj", unique = true)
+    @Column(name = "cnpj", unique = true, length = 14)
     String cnpj;
 
     @Column(name = "razao_social")
     String razaoSocial;
 
-    @Column(name = "logradouro")
+    @Column(name = "logradouro", length = 150)
     String logradouro;
 
-    @Column(name = "numero")
+    @Column(name = "numero", length = 7)
     String numero;
 
-    @Column(name = "complemento")
+    @Column(name = "complemento", length = 20)
     String complemento;
 
-    @Column(name = "bairro")
+    @Column(name = "bairro", length = 80)
     String bairro;
 
-    @Column(name = "cep")
+    @Column(name = "cep", length = 8)
     String cep;
 
-    @Column(name = "uf")
+    @Column(name = "uf", length = 2)
     String uf;
 
-    @Column(name = "municipio")
+    @Column(name = "municipio", length = 80)
     String municipio;
 
-    @Column(name = "inscricao_estadual")
+    @Column(name = "inscricao_estadual", length = 10)
     String inscricaoEstadual;
 
-    @Column(name = "telefone")
+    @Column(name = "telefone", length = 15)
     String telefone;
 
     @Column(name = "cnae")
