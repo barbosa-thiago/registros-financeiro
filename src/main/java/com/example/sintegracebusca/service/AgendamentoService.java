@@ -4,6 +4,7 @@ import com.example.sintegracebusca.domain.Agendamento;
 import com.example.sintegracebusca.dto.AgendamentoTotalDia;
 import com.example.sintegracebusca.dto.DataTotalPagamentos;
 import com.example.sintegracebusca.repository.AgendamentoRepository;
+import com.example.sintegracebusca.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -30,19 +31,8 @@ public class AgendamentoService {
 
     public TreeMap<LocalDate, AgendamentoTotalDia> listAgendamento(String mes) {
 
-        LocalDate primeiroDiaPesquisa = null;
-        LocalDate ultimoDiaPesquisa = null;
-        Month month = null;
-        if (nonNull(mes)) {
-            month = Month.valueOf(Month.class, mes.toUpperCase());
-            primeiroDiaPesquisa = LocalDate.of(Year.now().getValue(), month, 1);
-            ultimoDiaPesquisa = LocalDate.of(Year.now().getValue(), month, month.length(Year.isLeap(YearMonth.now().getYear())));
-        } else {
-            primeiroDiaPesquisa = LocalDate.now().minusDays(3);
-            ultimoDiaPesquisa = LocalDate.now().plusDays(45);
-        }
-
-
+        LocalDate primeiroDiaPesquisa = DateUtil.getPrimeiroDiaMes(mes);
+        LocalDate ultimoDiaPesquisa = DateUtil.getUltimoDiaMes(mes);
 
         var agendamentoMap = new TreeMap<>(agendamentoRepository.findByDataPagamentoMonth(primeiroDiaPesquisa, ultimoDiaPesquisa)
             .stream()

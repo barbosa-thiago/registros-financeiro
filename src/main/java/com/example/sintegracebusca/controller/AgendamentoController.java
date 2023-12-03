@@ -2,7 +2,7 @@ package com.example.sintegracebusca.controller;
 
 import com.example.sintegracebusca.domain.Agendamento;
 import com.example.sintegracebusca.service.AgendamentoService;
-import com.example.sintegracebusca.util.ListarMesesUtil;
+import com.example.sintegracebusca.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,7 +40,7 @@ public class AgendamentoController {
         System.out.println("mes: "+mes);
         model.addAttribute("somaMap", agendamentoMap);
         model.addAttribute("agendamento", new Agendamento());
-        model.addAttribute("meses", ListarMesesUtil.listarMeses());
+        model.addAttribute("meses", DateUtil.listarMeses());
 
 
 //        model.addAttribute("totalPages", agendamentoMap.getTotalPages());
