@@ -2,9 +2,11 @@ package com.example.sintegracebusca.service;
 
 import com.example.sintegracebusca.domain.Pagamento;
 import com.example.sintegracebusca.repository.PagamentoRepository;
+import com.example.sintegracebusca.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -16,7 +18,10 @@ public class PagamentoService {
         return pagamentoRepository.save(pagamento);
     }
 
-    public List<Pagamento> listarPagamentos() {
-        return pagamentoRepository.findAll();
+    public List<Pagamento> listarPagamentos(String mes) {
+        LocalDate primeiroDiaPesquisa = DateUtil.getPrimeiroDiaMes(mes);
+        LocalDate ultimoDiaPesquisa = DateUtil.getUltimoDiaMes(mes);
+
+        return pagamentoRepository.findByDataPagamentoMonth(primeiroDiaPesquisa, ultimoDiaPesquisa);
     }
 }

@@ -6,14 +6,12 @@ import com.example.sintegracebusca.enums.TipoPagamento;
 import com.example.sintegracebusca.service.AgendamentoService;
 import com.example.sintegracebusca.service.CompraService;
 import com.example.sintegracebusca.service.PagamentoService;
+import com.example.sintegracebusca.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
@@ -66,8 +64,9 @@ public class PagamentoController {
     }
 
     @GetMapping("pagamentos/list")
-    public String listarPagamentos(Model model) {
-        model.addAttribute("pagamentos", pagamentoService.listarPagamentos());
+    public String listarPagamentos(Model model, @RequestParam(required = false) String mes) {
+        model.addAttribute("pagamentos", pagamentoService.listarPagamentos(mes));
+        model.addAttribute("meses", DateUtil.listarMeses());
         return "pagamento/pagamentosDoMes";
     }
 }
