@@ -10,10 +10,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
+import java.time.Month;
+import java.time.Year;
+import java.time.YearMonth;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
+
+import static java.util.Objects.nonNull;
 
 @Service
 @RequiredArgsConstructor
@@ -25,9 +28,23 @@ public class AgendamentoService {
         return agendamentoRepository.save(agendamento);
     }
 
-    public TreeMap<LocalDate, AgendamentoTotalDia> listAgendamento() {
+    public TreeMap<LocalDate, AgendamentoTotalDia> listAgendamento(String mes) {
 
-        var agendamentoMap = new TreeMap<>(agendamentoRepository.findAll()
+        LocalDate primeiroDiaPesquisa = null;
+        LocalDate ultimoDiaPesquisa = null;
+        Month month = null;
+        if (nonNull(mes)) {
+            month = Month.valueOf(Month.class, mes.toUpperCase());
+            primeiroDiaPesquisa = LocalDate.of(Year.now().getValue(), month, 1);
+            ultimoDiaPesquisa = LocalDate.of(Year.now().getValue(), month, month.length(Year.isLeap(YearMonth.now().getYear())));
+        } else {
+            primeiroDiaPesquisa = LocalDate.now().minusDays(3);
+            ultimoDiaPesquisa = LocalDate.now().plusDays(45);
+        }
+
+
+
+        var agendamentoMap = new TreeMap<>(agendamentoRepository.findByDataPagamentoMonth(primeiroDiaPesquisa, ultimoDiaPesquisa)
             .stream()
             .collect(Collectors.groupingBy(Agendamento::getDataPagamento)));
 

@@ -19,9 +19,21 @@
 <div th:replace="fragments/navbar :: header"></div>
 
 <div class="result">
-    <a class="novo-registro btn btn-light mb-3 p-3" href="/agendamentos">Novo agendamento</a>
 
-    <h3>Agendamentos Registrados: </h3>
+    <div class="d-flex justify-content-between">
+
+        <div>
+            <label class="form-label" th:text="Mês" />
+            <select class="form-select" id="mesList" onchange="updatePageUrl()" name="Mes">
+                <option value="0">Selecione o Mes</option>
+                <option th:each="mes : ${meses}"
+                        th:value="${mes}" th:text="${mes}"></option>
+            </select>
+        </div>
+
+        <a class="novo-registro btn btn-light my-4 p-3" href="/agendamentos">Novo agendamento</a>
+
+    </div>
 
 
     <ul class="container">
@@ -66,7 +78,19 @@
 
 <script th:inline="javascript">
     function openModal(button) {
-        document.getElementById('data-ag').value = button.getAttribute('data-agendamento-date');
+        $("#data-ag-modal").value = button.getAttribute('data-agendamento-date');
+    }
+
+
+        function updatePageUrl() {
+        let selectedOption = document.getElementById("mesList").value;
+
+        console.log("mes: " + selectedOption);
+        // Construct the new URL with the selected option as a parameter
+        let baseUrl = '/agendamentos/list';
+
+        // Redirect to the new URL
+        window.location.href = baseUrl + '?mes=' + encodeURIComponent(selectedOption);
     }
 </script>
 

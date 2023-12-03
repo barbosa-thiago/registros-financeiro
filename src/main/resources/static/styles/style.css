@@ -22,6 +22,15 @@ form {
     box-sizing: border-box;
 }
 
+.modal-form {
+    width: 40vw;
+    max-width: 400px;
+    min-width: 250px;
+    margin: 0 auto;
+    padding-bottom: 2em;
+    box-sizing: border-box;
+}
+
 .form-group {
     margin: 0 auto;
 }

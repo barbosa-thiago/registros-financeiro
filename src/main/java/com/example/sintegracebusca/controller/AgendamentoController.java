@@ -1,18 +1,13 @@
 package com.example.sintegracebusca.controller;
 
 import com.example.sintegracebusca.domain.Agendamento;
-import com.example.sintegracebusca.dto.AgendamentoTotalDia;
-import com.example.sintegracebusca.dto.DataTotalPagamentos;
 import com.example.sintegracebusca.service.AgendamentoService;
+import com.example.sintegracebusca.util.ListarMesesUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
 
 import static java.util.Objects.isNull;
 
@@ -38,9 +33,14 @@ public class AgendamentoController {
     }
 
     @GetMapping("/agendamentos/list")
-    public String listarPagamentos(Model model) {
-        var agendamentoMap = agendamentoService.listAgendamento();
+    public String listarPagamentos(Model model, @RequestParam(required = false) String mes) {
+        var agendamentoMap = agendamentoService.listAgendamento(mes);
+
+
+        System.out.println("mes: "+mes);
         model.addAttribute("somaMap", agendamentoMap);
+        model.addAttribute("agendamento", new Agendamento());
+        model.addAttribute("meses", ListarMesesUtil.listarMeses());
 
 
 //        model.addAttribute("totalPages", agendamentoMap.getTotalPages());
