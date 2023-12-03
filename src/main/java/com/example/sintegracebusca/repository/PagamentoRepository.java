@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface PagamentoRepository extends JpaRepository<Pagamento, Long> {
     @Query(value = "select p.* from PAGAMENTO as p " +
-        "where p.data_pagamento >= :primeiroDiaPesquisa and p.data_pagamento <= :ultimoDiaPesquisa", nativeQuery = true)
+        "where p.data_pagamento >= :primeiroDiaPesquisa and p.data_pagamento <= :ultimoDiaPesquisa " +
+        "order by p.data_pagamento desc", nativeQuery = true)
     List<Pagamento> findByDataPagamentoMonth(LocalDate primeiroDiaPesquisa, LocalDate ultimoDiaPesquisa);
 }
