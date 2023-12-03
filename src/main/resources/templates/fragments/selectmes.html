@@ -1,0 +1,16 @@
+<div>
+  <label class="form-label" th:text="Mês"/>
+  <select class="form-select" id="mesList" onchange="updatePageUrl()" name="Mes">
+    <option value="0">Selecione</option>
+    <option th:each="mes : ${meses}"
+            th:value="${mes}" th:text="${mes}"></option>
+  </select>
+  <script>
+    function updatePageUrl() {
+      let selectedOption = document.getElementById("mesList").value;
+      let baseUrl = '/agendamentos/list';
+      console.log("endereco: " + window.location.href);
+      window.location.href = window.location.href.split("?")[0] + '?mes=' + encodeURIComponent(selectedOption);
+    }
+  </script>
+</div>

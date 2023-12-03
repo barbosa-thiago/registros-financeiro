@@ -14,7 +14,13 @@
 <div th:include="fragments/navbar :: header"></div>
 <div class="result">
 
-    <a class="btn btn-light mb-3 p-3" href="/pagamentos">Novo pagamento</a>
+    <div class="d-flex justify-content-between">
+
+        <div th:replace="fragments/selectmes :: div"></div>
+
+
+        <a class="btn btn-light my-4 p-3" href="/pagamentos">Novo pagamento</a>
+    </div>
 
     <h3>Pagamentos Registrados</h3>
 
