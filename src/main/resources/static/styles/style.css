@@ -195,8 +195,15 @@ td {
     color: forestgreen;
 }
 
+@media screen and (max-width: 765px) {
+    .card {
+        flex: 0 0 30.66667%; /* Equivalent to width: 41.66667%; */
+        max-width: 30.66667%;
+    }
+}
 
-@media screen and (max-width: 450px) {
+
+@media screen and (max-width: 550px) {
     .card {
         flex: 0 0 46.66667%; /* Equivalent to width: 41.66667%; */
         max-width: 46.66667%;

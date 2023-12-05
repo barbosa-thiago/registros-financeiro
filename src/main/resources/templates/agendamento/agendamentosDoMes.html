@@ -37,9 +37,9 @@
                     th:text="${#temporals.format(entry.value.dataTotalPagamentos.data, 'dd/MMM')}"></h3>
                 <p class="font-weight-bold" th:text="'Total: ' + ${entry.value.dataTotalPagamentos.somaDoDia}"></p>
             </div>
-            <ul class="row">
+            <ul class="row card-container">
 
-                <li class="card card-agendamento m-1 col-2 mb-4 text-center"
+                <li class="card card-agendamento m-1  mb-4 text-center"
                     th:classappend="${value.pago} ? 'foi-pago' : 'nao-foi-pago'"
                     th:each="value: ${entry.value.agendamentos}">
                     <div class="my-auto"
@@ -54,7 +54,7 @@
                         </form>
                     </div>
                 </li>
-                <li class="card card-ad col-2 m-1 mb-4 text-center"
+                <li class="card card-ad  m-1 mb-4 text-center"
                     data-bs-toggle="modal"
                     data-bs-target="#meumodal"
                     onclick="openModal(this)"
