@@ -9,10 +9,11 @@
 
     <link th:href="@{/styles/style.css}" rel="stylesheet"/>
     <link th:href="@{/styles/navbar.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/table.css}" rel="stylesheet"/>
 </head>
 <body>
 <div th:include="fragments/navbar :: header"></div>
-<div class="result">
+<div class="result mb-0">
 
     <div class="d-flex justify-content-between">
 
@@ -24,28 +25,38 @@
 
     <h3>Pagamentos Registrados</h3>
 
-    <table class="table table-bordered table-striped">
-        <thead>
-        <tr>
-            <td>Descricao</td>
-            <td>Valor</td>
-            <td>Fornecedor</td>
-            <td>Data</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:if="${pagamentos.empty}">
-            <td colspan="4">Sem Pagamentos</td>
-        </tr>
-        <tr th:each="pagamento : ${pagamentos}">
-            <td th:text="${pagamento.descricao}"></td>
-            <td th:text="${pagamento.valor}"></td>
-            <td th:text="${pagamento.compra} ? ${pagamento.compra.fornecedor} : ''"></td>
-            <td th:text="${pagamento.dataPagamento}"></td>
-        </tr>
-        </tbody>
-    </table>
+</div>
 
+<div class="container-table">
+    <div class="wrap-table">
+        <div class="table-result">
+            <div class="table-head">
+                <table class="">
+                    <thead>
+                    <tr class="tb-row">
+                        <th>Descricao</th>
+                        <th>Valor</th>
+                        <th>Fornecedor</th>
+                        <th>Data</th>
+                    </tr>
+
+                    </thead>
+
+                    <tbody>
+                    <tr th:if="${pagamentos.empty}">
+                        <td colspan="4">Sem pagamentos</td>
+                    </tr>
+                    <tr th:each="pagamento : ${pagamentos}">
+                        <td th:text="${pagamento.descricao}"></td>
+                        <td th:text="${pagamento.valor}"></td>
+                        <td th:text="${pagamento.compra} ? ${pagamento.compra.fornecedor} : ''"></td>
+                        <td th:text="${pagamento.dataPagamento}"></td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
 </body>

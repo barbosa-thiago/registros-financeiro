@@ -112,10 +112,6 @@ form:last-child {
     padding-bottom: 2em;
 }
 
-/*body {*/
-/*    background-color: #3b3b4f;*/
-/*}*/
-
 ul li {
     list-style: none;
 }
@@ -126,32 +122,6 @@ ul li {
     grid-column-gap: 1em;
     justify-content: space-between;
 
-}
-
-table {
-    width: 100%;
-    margin: 20px auto;
-    table-layout: auto;
-}
-
-.fixed {
-    table-layout: fixed;
-}
-thead tr {
-    font-weight: bold;
-}
-
-table,
-td,
-th {
-    border-collapse: collapse;
-}
-
-th,
-td {
-    padding: 10px;
-    border: solid 1px;
-    text-align: center;
 }
 
 .novo-registro:hover {
@@ -189,10 +159,10 @@ td {
     transform: translateY(-5%);
 }
 .card-ad {
-    color: darkgreen;
+    color: darkviolet;
 }
 .card-ad:hover {
-    color: forestgreen;
+    color: blueviolet;
 }
 
 @media screen and (max-width: 765px) {
