@@ -27,7 +27,7 @@ public class PagamentoController {
     @GetMapping("/pagamentos")
     public String save(Model model) {
         model.addAttribute("pagamento", new Pagamento());
-        model.addAttribute("compras", compraService.listarCompras());
+        model.addAttribute("compras", compraService.listarCompras(null));
 
         return "pagamento/pagamento";
     }
