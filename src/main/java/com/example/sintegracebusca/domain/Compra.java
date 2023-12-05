@@ -42,6 +42,12 @@ public class Compra implements Serializable {
     @OneToMany
     Set<Pagamento> pagamentos = new HashSet<>();
 
+    @OrderBy("id asc")
+    @ToString.Exclude
+    @Builder.Default
+    @OneToMany(mappedBy = "compra", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Produto> produtos = new HashSet<>();
+
     public Boolean isPago() {
         return this.pagamentos.stream().mapToDouble(Pagamento::getValor).sum() == this.valor;
     }

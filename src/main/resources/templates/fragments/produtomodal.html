@@ -1,0 +1,27 @@
+<div class="modal fade" id="produto-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Produto</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <form class="modal-form" th:object="${produto}" method="post">
+                    <label class="form-label" id="nome-produto-lb" for="nome-produto">Nome</label>
+                    <input class="form-control" th:field="*{nome}" type="text" id="nome-produto" />
+
+                    <label class="form-label" id="quantidade-pd-label" for="quantidade-pd-modal">Quantidade</label>
+                    <input class="form-control" th:field="*{quantidade}" required type="text" id="quantidade-pd-modal"/>
+
+                    <label class="form-label" id="preco-pd-label" for="preco-pd-modal">Preço</label>
+                    <input class="form-control w-20" th:field="*{preco}" required autocomplete="off" type="text" id="preco-pd-modal"/>
+
+                    <div class="text-center my-3">
+                        <button class="btn btn-primary" type="submit" >Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

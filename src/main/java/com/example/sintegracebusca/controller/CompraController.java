@@ -1,6 +1,7 @@
 package com.example.sintegracebusca.controller;
 
 import com.example.sintegracebusca.domain.Compra;
+import com.example.sintegracebusca.domain.Produto;
 import com.example.sintegracebusca.service.CompraService;
 import com.example.sintegracebusca.util.DateUtil;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ public class CompraController {
     @GetMapping("/compras")
     public String save(Model model) {
         model.addAttribute("compra", new Compra());
+        model.addAttribute("produto", new Produto());
         return "compra/compra";
     }
 
@@ -32,6 +34,7 @@ public class CompraController {
         if(isNull(compraSalva))
             return "erro";
         model.addAttribute("compra", compra);
+        model.addAttribute("produto", new Produto());
         return "compra/compraResult";
     }
 
