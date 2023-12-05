@@ -74,9 +74,19 @@ input, textarea {
     text-decoration: none;
     font-weight: bold;
 }
+
+.result .reg-body {
+    font-size: 1.5rem;
+}
+
+.result .voltar {
+    color: #fff;
+}
+
 .result a:hover {
     color: #2f3e8f;
 }
+
 
 input[type="submit"] {
     display: block;
@@ -161,17 +171,34 @@ td {
     border-left: 4px solid red;
 }
 
+.card-container {
+    display: flex;
+}
+
 .card {
     padding: 1rem 1rem 1rem 1rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24);
     transition: all 0.5s ease;
     color: darkblue;
+    flex: 0 0 16.66667%; /* Equivalent to width: 41.66667%; */
+    max-width: 16.66667%
 }
 .card:hover {
     cursor: pointer;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.19), 0px 10px 20px rgba(0, 0, 0, 0.23);
     transform: translateY(-5%);
 }
+.card-ad {
+    color: darkgreen;
+}
 .card-ad:hover {
-    color: blue;
+    color: forestgreen;
+}
+
+
+@media screen and (max-width: 450px) {
+    .card {
+        flex: 0 0 46.66667%; /* Equivalent to width: 41.66667%; */
+        max-width: 46.66667%;
+    }
 }
