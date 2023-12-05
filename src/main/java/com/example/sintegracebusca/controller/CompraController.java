@@ -2,6 +2,7 @@ package com.example.sintegracebusca.controller;
 
 import com.example.sintegracebusca.domain.Compra;
 import com.example.sintegracebusca.service.CompraService;
+import com.example.sintegracebusca.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import static java.util.Objects.isNull;
 
@@ -34,8 +36,9 @@ public class CompraController {
     }
 
     @GetMapping("/compras/list")
-    public String listarPagamentos(Model model) {
-        model.addAttribute("compras", compraService.listarCompras());
+    public String listarPagamentos(Model model, @RequestParam(required = false) String mes) {
+        model.addAttribute("compras", compraService.listarCompras(mes));
+        model.addAttribute("meses", DateUtil.listarMeses());
         return "compra/comprasDoMes";
     }
 }
