@@ -31,7 +31,7 @@
 
     <ul class="container">
         <li th:each="entry: ${somaMap}">
-            <div class="d-flex justify-content-between border-bottom">
+            <div class="d-flex justify-content-between border-top">
 
                 <h3 class="d-inline"
                     th:text="${#temporals.format(entry.value.dataTotalPagamentos.data, 'dd/MMM')}"></h3>
@@ -39,27 +39,27 @@
             </div>
             <ul class="row">
 
-                <li class="col-4 my-2 text-center" th:each="value: ${entry.value.agendamentos}">
-                    <div th:class="${value.pago} ? 'foi-pago border border-success' : 'nao-foi-pago border border-danger'"
-                         th:if="value">
+                <li class="card card-agendamento m-1 col-2 mb-4 text-center"
+                    th:classappend="${value.pago} ? 'foi-pago' : 'nao-foi-pago'"
+                    th:each="value: ${entry.value.agendamentos}">
+                    <div class="my-auto"
+                            th:if="value">
                         <span th:text="${value.fornecedor}"></span><br/>
                         <span th:text="${value.valor}"></span><br/>
 
-                        <form class="d-inline" th:action="@{/agendamentos/update/{id}(id=${value.id})}"
+                        <form class="d-inline agendamento-pg"
+                              th:action="@{/agendamentos/update/{id}(id=${value.id})}"
                               method="post">
                             <input type="hidden" name="pago" th:value="${!value.pago}"/>
-                            <button class="btn btn-primary  " type="submit">Ok</button>
                         </form>
                     </div>
                 </li>
-                <li class="m-2 w-20 col-3">
-                    <button type="button" data-bs-toggle="modal"
-                            data-bs-target="#meumodal"
-                            onclick="openModal(this)"
-                            th:attr="data-agendamento-date=${entry.value.dataTotalPagamentos.data}"
-                            class="novo-registro btn btn-light p-3 m-4">
-                        <i class="fas fa-heart"></i>Adicionar
-                    </button>
+                <li class="card card-ad col-2 m-1 mb-4 text-center"
+                    data-bs-toggle="modal"
+                    data-bs-target="#meumodal"
+                    onclick="openModal(this)"
+                    th:attr="data-agendamento-date=${entry.value.dataTotalPagamentos.data}">
+                    <p class="my-auto">Agendar pagamento</p>
                 </li>
             </ul>
         </li>
@@ -70,13 +70,32 @@
 <div th:insert="fragments/agendamentomodal :: div"></div>
 
 <script th:inline="javascript">
-    function openModal(button) {
-        let data = new Date(button.getAttribute('data-agendamento-date')).format('DD/MM/YYYY');
-        console.log("data: " + data);
-        document.getElementById('data-ag-modal').value = button.getAttribute('data-agendamento-date').format('DD/MM/YYYY');
-    }
-</script>
+    function openModal(li) {
+        let date = li.getAttribute('data-agendamento-date');
 
+        let dateParts = date.split('-');
+        let year = parseInt(dateParts[0]);
+        let month = parseInt(dateParts[1]) - 1;
+        let day = parseInt(dateParts[2]);
+
+        document.getElementById('data-ag-modal').value = Intl.DateTimeFormat("fr-FR", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric"
+        }).format(new Date(year, month, day));;
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let clickableDivs = document.querySelectorAll(".card-agendamento");
+
+        clickableDivs.forEach(div => {
+            div.addEventListener("click", () =>{
+                div.getElementsByClassName("agendamento-pg")[0].submit();
+                div.style.backgroundColor= "lightgray";
+            });
+        });
+    });
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 

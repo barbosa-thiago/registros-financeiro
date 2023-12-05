@@ -11,13 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
-import java.time.Month;
-import java.time.Year;
-import java.time.YearMonth;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
-
-import static java.util.Objects.nonNull;
 
 @Service
 @RequiredArgsConstructor

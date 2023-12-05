@@ -1,19 +1,26 @@
 <div class="modal fade" id="meumodal">
     <div class="modal-dialog">
         <div class="modal-content">
-    <!--            <div class="modal-header">-->
+            <div class="modal-header">
+                <h4>Novo agendamento</h4>
+            </div>
 
-    <!--                <p th:text="'Novo agendamento para o dia ' + ${#temporals.format(entry.key, 'dd/MMM')}"></p>-->
-    <!--            </div>-->
             <div class="modal-body">
 
-                body here
-                <p>ID: <span id="modalItemId"></span></p>
-                <label id="testando" for="data-ag"></label>
-                <input class="form-control" type="text" id="data-ag" readonly />
-            </div>
-            <div class="modal-footer">
-                end modal
+                <form class="modal-form" th:action="@{/agendamentos}" th:object="${agendamento}" method="post">
+                    <label class="form-label" id="data-ag-label" for="data-ag-modal">Data</label>
+                    <input class="form-control" th:field="*{dataPagamento}" type="text" id="data-ag-modal" />
+
+                    <label class="form-label" id="fornecedor-ag-label" for="fornecedor-ag-modal">Fornecedor</label>
+                    <input class="form-control" th:field="*{fornecedor}" required type="text" id="fornecedor-ag-modal"/>
+
+                    <label class="form-label" id="valor-ag-label" for="valor-ag-modal">Valor</label>
+                    <input class="form-control w-20" th:field="*{valor}" required autocomplete="off" type="text" id="valor-ag-modal"/>
+
+                    <div class="text-center my-3">
+                        <button class="btn btn-primary" type="submit" >Salvar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
