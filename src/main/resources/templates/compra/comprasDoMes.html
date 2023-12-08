@@ -46,7 +46,7 @@
                             <td th:text="${compra.fornecedor}"></td>
                             <td th:text="${compra.valor}"></td>
                             <td th:text="${compra.descricao}"></td>
-                            <td th:text="${compra.dataCompra}"></td>
+                            <td th:text="${#temporals.format(compra.dataCompra, 'dd/MM/yy')}"></td>
                         </tr>
                 </table>
 
