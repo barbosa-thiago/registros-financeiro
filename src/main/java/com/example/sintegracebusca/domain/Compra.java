@@ -5,7 +5,9 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -46,7 +48,7 @@ public class Compra implements Serializable {
     @ToString.Exclude
     @Builder.Default
     @OneToMany(mappedBy = "compra", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Produto> produtos = new HashSet<>();
+    private List<Produto> produtos = new ArrayList<>();
 
     public Boolean isPago() {
         return this.pagamentos.stream().mapToDouble(Pagamento::getValor).sum() == this.valor;

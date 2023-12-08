@@ -8,10 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 import static java.util.Objects.isNull;
 
@@ -22,20 +21,21 @@ public class CompraController {
 
     @GetMapping("/compras")
     public String save(Model model) {
+        var compra = new Compra();
         model.addAttribute("compra", new Compra());
         model.addAttribute("produto", new Produto());
+        model.addAttribute("produtos", compra.getProdutos() );
         return "compra/compra";
     }
 
 
     @PostMapping("/compras")
-    public String save(@ModelAttribute Compra compra, BindingResult bindingResult, Model model) {
+    public Compra save(@RequestBody Compra compra, BindingResult bindingResult, Model model) {
         var compraSalva = compraService.save(compra);
-        if(isNull(compraSalva))
-            return "erro";
+
         model.addAttribute("compra", compra);
         model.addAttribute("produto", new Produto());
-        return "compra/compraResult";
+        return compraSalva;
     }
 
     @GetMapping("/compras/list")
