@@ -5,6 +5,7 @@ import com.example.sintegracebusca.domain.Produto;
 import com.example.sintegracebusca.service.CompraService;
 import com.example.sintegracebusca.util.DateUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,12 +31,12 @@ public class CompraController {
 
 
     @PostMapping("/compras")
-    public Compra save(@RequestBody Compra compra, BindingResult bindingResult, Model model) {
+    public ResponseEntity<Compra> save(@RequestBody Compra compra, BindingResult bindingResult, Model model) {
         var compraSalva = compraService.save(compra);
 
         model.addAttribute("compra", compra);
         model.addAttribute("produto", new Produto());
-        return compraSalva;
+        return ResponseEntity.ok(compraSalva);
     }
 
     @GetMapping("/compras/list")

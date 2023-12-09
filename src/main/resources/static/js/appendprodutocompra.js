@@ -1,10 +1,9 @@
-let count = 0
 function submitChildForm() {
     let prodNome = document.getElementById('nome-produto-modal').value;
     let prodQuantidade = document.getElementById('quantidade-produto-modal').value;
     let prodPreco = document.getElementById('preco-produto-modal').value;
 
-    console.log("preco: "+prodPreco);
+    console.log("preco: " + prodPreco);
 
     let produto = {
         name: prodNome,
@@ -12,46 +11,41 @@ function submitChildForm() {
         preco: prodPreco
     };
 
-    appendChildToList(produto);
+    // console.log("limpando valores");
+    // $('#produto-modal').on('hidden.bs.modal',  () => {
+    //     $(this).find('form').trigger('reset');
+    // });
+    appendChildToDiv(produto);
 }
 
-function appendChildToList(produto) {
-    // Code to dynamically add the child object to the list
-
+function appendChildToDiv() {
     let childListContainer = $('#produto-list-container');
-
-    console.log("nome: " + produto.name);
+    $("#produto-label").removeAttr("hidden");
 
     childListContainer.append(
-        `<div class="col">
-            <label class="form-label">Produto</label>
-            <input id="nome-produto-display" class="form-control" type="text" required="true" value="${produto.name}"/>
-        </div>
-        <div class="col-2">
-            <label class="form-label">Quantidade</label>
-            <input id="quantidade-produto-display" class="form-control" type="text" required="true" value="${produto.quantidade}"/>
-        </div>
-        <div class="col-2">
-            <label class="form-label">Preco</label>
-            <input id="preco-produto-display" class="form-control" type="text" required="true" value="${produto.preco}"/>
-        </div>
-        <div class="col-2">
-            <label class="form-label">Subtotal</label>
-            <input id="subtotal-produto-display" class="form-control" type="text" required="true" value="${produto.preco * produto.quantidade}"/>
+        `<div id="produto-input" class="mb-3 row justify-content-start">
+    
+            <div class="col">
+                <input id="nome-produto-display" class="form-control" type="text" required="true" />
+            </div>
+            <div class="col-2">
+                <input id="quantidade-produto-display" 
+                class="form-control produto-input-altera-quant input-altera-valor" 
+                type="text" required="true" />
+            </div>
+            <div class="col-2">
+                <input id="preco-produto-display" 
+                class="form-control produto-input-altera-preco input-altera-valor" 
+                type="text" required="true" />
+            </div>
+            <div class="col-2">
+                <input id="subtotal-produto-display" class="form-control subtotal" type="text" required="true" readonly/>
+            </div>
         </div>`
-    );
-
-    console.log(count)
-
-    console.log("limpando valores");
-    $('#produto-modal').on('hidden.bs.modal', function () {
-        $(this).find('form').trigger('reset');
-    });
-
-    count++;
+    )
 }
 
-function getValues() {
+function postProduto() {
     console.log("chamando funcao");
     console.log(document.getElementById("nome-produto-display").value);
 
@@ -66,8 +60,8 @@ function getValues() {
             }
         ]
     }
-    
-    
+
+
     console.log(compra)
 
     $.ajax({
@@ -75,13 +69,15 @@ function getValues() {
         url: '/compras', // Replace with your actual endpoint
         contentType: 'application/json',
         data: JSON.stringify(compra),
-        success: function(response) {
+        success: function (response) {
             console.log('Success:', response);
-
+            console.log('Fornecedor:', response.fornecedor);
+            window.location.href = "compras/list"
         },
-        error: function(error) {
+        error: function (error) {
             // Handle error response
             console.error('Error:', error);
         }
     });
 }
+
