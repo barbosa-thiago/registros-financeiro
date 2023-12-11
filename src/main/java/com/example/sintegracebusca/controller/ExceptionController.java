@@ -4,7 +4,7 @@ import com.example.sintegracebusca.exception.ResponseException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.AccessDeniedException;
+//import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -68,15 +68,15 @@ public class ExceptionController {
         return new ResponseEntity<>(message, message.getStatus());
     }
 
-    @ExceptionHandler(AccessDeniedException.class)
-    public ResponseEntity<?> accessDeniedException(AccessDeniedException ex) {
-        log.error(ex.getClass().getName(), ex);
-
-        var message = ResponseException.builder()
-            .status(HttpStatus.FORBIDDEN)
-            .message("Access denied")
-        .build();
-
-        return new ResponseEntity<>(message, message.getStatus());
-    }
+//    @ExceptionHandler(AccessDeniedException.class)
+//    public ResponseEntity<?> accessDeniedException(AccessDeniedException ex) {
+//        log.error(ex.getClass().getName(), ex);
+//
+//        var message = ResponseException.builder()
+//            .status(HttpStatus.FORBIDDEN)
+//            .message("Access denied")
+//        .build();
+//
+//        return new ResponseEntity<>(message, message.getStatus());
+//    }
 }

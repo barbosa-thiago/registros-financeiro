@@ -21,48 +21,49 @@ function submitChildForm() {
 function appendChildToDiv() {
     let childListContainer = $('#produto-list-container');
     $("#produto-label").removeAttr("hidden");
+    $("#total-container").css("visibility", "visible");
 
     childListContainer.append(
-        `<div id="produto-input" class="mb-3 row justify-content-start">
+        `<div id="produto-input" class="produto-inputs mb-3 row justify-content-start">
     
             <div class="col">
                 <input id="nome-produto-display" class="form-control" type="text" required="true" />
             </div>
             <div class="col-2">
                 <input id="quantidade-produto-display" 
-                class="form-control produto-input-altera-quant input-altera-valor" 
+                class="form-control produto-input-altera-quant input-altera-valor only-numbers" 
                 type="text" required="true" />
             </div>
             <div class="col-2">
                 <input id="preco-produto-display" 
-                class="form-control produto-input-altera-preco input-altera-valor" 
-                type="text" required="true" />
+                class="form-control produto-input-altera-preco input-altera-valor currency-input" 
+                type="text" required="true" value="0.00"/>
             </div>
             <div class="col-2">
-                <input id="subtotal-produto-display" class="form-control subtotal" type="text" required="true" readonly/>
+                <input id="subtotal-produto-display" class="form-control subtotal only-numbers" onchange="updateTotal()" type="text" required="true" readonly/>
             </div>
         </div>`
     )
 }
 
 function postProduto() {
-    console.log("chamando funcao");
-    console.log(document.getElementById("nome-produto-display").value);
-
     const compra = {
         descricao: document.getElementById("compra-descricao-display").value,
         fornecedor: document.getElementById("compra-fornecedor-display").value,
-        produtos: [
-            {
-                nome: document.getElementById("nome-produto-display").value,
-                preco: document.getElementById("preco-produto-display").value,
-                quantidade: document.getElementById("quantidade-produto-display").value,
-            }
-        ]
+        produtos: []
     }
+    let produtoInputs = document.getElementsByClassName("produto-inputs");
 
-
-    console.log(compra)
+    Array.from(produtoInputs).forEach((el => {
+            compra.produtos.push(
+                {
+                    nome: el.querySelector("#nome-produto-display").value,
+                    preco: el.querySelector("#preco-produto-display").value,
+                    quantidade: el.querySelector("#quantidade-produto-display").value,
+                }
+            );
+        })
+    )
 
     $.ajax({
         type: 'POST',
