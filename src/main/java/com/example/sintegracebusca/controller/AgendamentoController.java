@@ -36,8 +36,6 @@ public class AgendamentoController {
     public String listarPagamentos(Model model, @RequestParam(required = false) String mes) {
         var agendamentoMap = agendamentoService.listAgendamento(mes);
 
-
-        System.out.println("mes: "+mes);
         model.addAttribute("somaMap", agendamentoMap);
         model.addAttribute("agendamento", new Agendamento());
         model.addAttribute("meses", DateUtil.listarMeses());
