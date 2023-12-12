@@ -12,11 +12,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@SequenceGenerator(name = "INC_CLIENTE", sequenceName = "GEN_CLIENTE_ID", allocationSize = 1)
+@SequenceGenerator(name = "INC_AGENDAMENTO", sequenceName = "GEN_AGENDAMENTO_ID", allocationSize = 1)
 public class Agendamento {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "INC_CLIENTE")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "INC_AGENDAMENTO")
     Long id;
 
     @Column(name = "data_pagamento", nullable = false)

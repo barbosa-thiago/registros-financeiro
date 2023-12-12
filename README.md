@@ -1,6 +1,6 @@
-### Buscador Sintegra
-Aplicação que busca informações de uma empresa a partir do seu CNPJ no portal Sintegra-CE, salva <br />
-informações no banco de dados e as retorna
+### Gerenciador de Custos Financeiro
+Gerenciamento de compras, pagamentos, agendamentos de custo, além de buscar informações de uma  <br />
+empresa a partir do CNPJ no portal Sintegra-CE, salva informações no banco de dados e as retorna
 
 As variáveis de ambiente necessárias para rodar a aplicação estão no arquivo **.envExemplo** na raiz do projeto
 
@@ -16,7 +16,8 @@ DB_PORT=
 A aplicação está configurada para conexão com **firebirdSQL** de deve estar acessível com host, porta e credenciais especificados nas <br />
 variáveis de ambiente
 
-É necessário que seja criada uma sequencia no **firebird** chamada **GEN_CLIENTE_ID**
+É necessário que sejam criadas sequencias no **firebird**, pois o Hibernate nao cria automaticamente para esse banco <br />
+chamada **GEN_CLIENTE_ID, GEN_PAGAMENTO_ID, GEN_COMPRA_ID, GEN_PRODUTO_ID, GEN_AGENDAMENTO_ID**
 
 #### Tecnologias
 
