@@ -1,6 +1,7 @@
 package com.example.sintegracebusca.controller;
 
 import com.example.sintegracebusca.domain.Agendamento;
+import com.example.sintegracebusca.domain.Pagamento;
 import com.example.sintegracebusca.service.AgendamentoService;
 import com.example.sintegracebusca.util.DateUtil;
 import lombok.RequiredArgsConstructor;
@@ -49,8 +50,10 @@ public class AgendamentoController {
     }
 
     @PostMapping("/agendamentos/update/{id}")
-    public String update(@PathVariable Long id, @RequestParam boolean pago) {
-        agendamentoService.update(id, pago);
+    public String update(@PathVariable Long id,
+                         @RequestBody Pagamento pagamento) {
+
+        agendamentoService.update(id, pagamento);
         return "redirect:/agendamentos/list";
     }
 

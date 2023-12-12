@@ -1,0 +1,30 @@
+<div class="modal fade" id="confirma-pagamento-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Pagar agendamento</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <form class="modal-form"  method="post">
+                    <label class="form-label" id="valor-confirmacao-lb" for="valor-pagamento-confirmacao">Valor</label>
+                    <input class="form-control"  type="text" name="valor-pagamento-confirmacao" id="valor-pagamento-confirmacao" />
+
+                    <label class="form-label" id="data-confirmacao-lb" for="data-pagamento-confirmacao">Data</label>
+                    <input class="form-control"  required type="text" name="data-pagamento-confirmacao" id="data-pagamento-confirmacao"/>
+
+                    <label class="form-label" id="fornecedor-confirmacao-lb" for="fornecedor-pagamento-confirmacao">Fornecedor</label>
+                    <input class="form-control w-20"  required autocomplete="off" type="text" name="tipo-pagamento-confirmacao" id="fornecedor-pagamento-confirmacao"/>
+
+                    <input type="hidden" name="pago" id="agendamento-foi-pago"/>
+                    <input type="hidden" name="pago" id="pagando-agendamento-id"/>
+
+                    <div class="text-center my-3">
+                        <button class="btn btn-primary" type="button" data-bs-dismiss="modal" onclick="submitChildForm()" >Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

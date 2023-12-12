@@ -1,22 +1,4 @@
-function submitChildForm() {
-    let prodNome = document.getElementById('nome-produto-modal').value;
-    let prodQuantidade = document.getElementById('quantidade-produto-modal').value;
-    let prodPreco = document.getElementById('preco-produto-modal').value;
 
-    console.log("preco: " + prodPreco);
-
-    let produto = {
-        name: prodNome,
-        quantidade: prodQuantidade,
-        preco: prodPreco
-    };
-
-    // console.log("limpando valores");
-    // $('#produto-modal').on('hidden.bs.modal',  () => {
-    //     $(this).find('form').trigger('reset');
-    // });
-    appendChildToDiv(produto);
-}
 
 function appendChildToDiv() {
     let childListContainer = $('#produto-list-container');
@@ -67,12 +49,11 @@ function postProduto() {
 
     $.ajax({
         type: 'POST',
-        url: '/compras', // Replace with your actual endpoint
+        url: '/compras',
         contentType: 'application/json',
         data: JSON.stringify(compra),
         success: function (response) {
             console.log('Success:', response);
-            console.log('Fornecedor:', response.fornecedor);
             window.location.href = "compras/list"
         },
         error: function (error) {
