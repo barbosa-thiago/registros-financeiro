@@ -8,8 +8,6 @@
   <script>
     function updatePageUrl() {
       let selectedOption = document.getElementById("mesList").value;
-      let baseUrl = '/agendamentos/list';
-      console.log("endereco: " + window.location.href);
       window.location.href = window.location.href.split("?")[0] + '?mes=' + encodeURIComponent(selectedOption);
     }
   </script>
