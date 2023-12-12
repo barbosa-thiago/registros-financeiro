@@ -6,9 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -41,8 +39,11 @@ public class Compra implements Serializable {
     @Column(name = "pago")
     Boolean pago;
 
-    @OneToMany
-    Set<Pagamento> pagamentos = new HashSet<>();
+    @OneToMany(fetch = FetchType.LAZY)
+    List<Pagamento> pagamentos = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY)
+    List<Agendamento> agendamentos = new ArrayList<>();
 
     @OrderBy("id asc")
     @ToString.Exclude

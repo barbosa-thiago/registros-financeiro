@@ -31,4 +31,12 @@ public class Agendamento {
 
     @Column(name = "pago")
     Boolean pago = false;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pagamento_id")
+    Pagamento pagamento;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "compra_id")
+    Compra compra;
 }

@@ -36,8 +36,7 @@ public class Pagamento {
     @JoinColumn(name = "compra_id")
     Compra compra;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "agendamento_id")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "pagamento")
     Agendamento agendamento;
 
 }
