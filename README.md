@@ -26,3 +26,4 @@ chamada **GEN_CLIENTE_ID, GEN_PAGAMENTO_ID, GEN_COMPRA_ID, GEN_PRODUTO_ID, GEN_A
 - Jsoup
 - Thymeleaf
 - FirebirdSQL
+- Jquery
