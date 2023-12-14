@@ -12,3 +12,6 @@ spring:
     url: jdbc:firebirdsql:${DB_HOST}/${DB_PORT}:controle.db?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false
     username: ${DATABASE_USER}
     password: ${DATABASE_PASSWORD}
+
+jwt:
+  secret: ${JWT_SECRET}
