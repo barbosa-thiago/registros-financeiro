@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+
+  <script
+          src="https://code.jquery.com/jquery-3.7.1.min.js"
+          integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+          crossorigin="anonymous"></script>
+</head>
+<body>
+
+<form id="loginForm">
+  <label for="username">Username:</label>
+  <input type="text" id="username" name="username" required>
+
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password" required>
+
+  <button type="button" onclick="login()">Login</button>
+</form>
+
+<script>
+  function login() {
+    const username = $("#username").val();
+    const password = $("#password").val();
+
+    fetch("/authenticate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    })
+            .then(response => response.json())
+            .then(data => {
+              console.log(data);
+              localStorage.setItem("token", data.jwtToken);
+              console.log("Token obtained" + localStorage.getItem("token"));
+            })
+            .catch(error => {
+              console.error("Error:", error);
+            });
+  }
+</script>
+
+</body>
+</html>
