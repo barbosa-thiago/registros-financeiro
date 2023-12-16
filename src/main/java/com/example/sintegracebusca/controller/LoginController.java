@@ -11,10 +11,4 @@ public class LoginController {
     public String showLoginPage() {
         return "login";
     }
-
-    @PostMapping("/login")
-    public String processLogin() {
-
-        return "redirect:/agendamentos/list";
-    }
 }
