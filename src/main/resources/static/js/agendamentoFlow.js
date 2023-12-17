@@ -46,7 +46,7 @@ function submitChildForm() {
         contentType: 'application/json',
         data: JSON.stringify(pagamento),
         success: function (response) {
-            console.log('Success:', response);
+            console.log('Success:', response.getStats());
             window.location.reload();
         },
         error: function(xhr, status, error) {

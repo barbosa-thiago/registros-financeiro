@@ -53,7 +53,7 @@ function postProduto() {
         contentType: 'application/json',
         data: JSON.stringify(compra),
         success: function (response) {
-            console.log('Success:', response);
+            console.log('Success:', response.getStats());
             window.location.href = "compras/list"
         },
         error: function (error) {
