@@ -45,6 +45,9 @@ public class Compra implements Serializable {
     @OneToMany(fetch = FetchType.LAZY)
     List<Agendamento> agendamentos = new ArrayList<>();
 
+    @Column(name = "agendado")
+    Boolean agendado;
+
     @OrderBy("id asc")
     @ToString.Exclude
     @Builder.Default
@@ -53,6 +56,10 @@ public class Compra implements Serializable {
 
     public Boolean isPago() {
         return this.pagamentos.stream().mapToDouble(Pagamento::getValor).sum() == this.valor;
+    }
+
+    public Boolean getAgendado() {
+        return !this.agendamentos.isEmpty();
     }
 
 }

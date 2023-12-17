@@ -18,6 +18,10 @@
 <div class="result">
     <h3 class="m-4">Compra Registrada</h3>
     <div class="reg-body vw-30">
+        <div class="salvo my-3 row ">
+            <p class="col">Fornecedor: </p>
+            <p class="col" th:text="${compra.fornecedor}"/>
+        </div>
         <div class="salvo my-3 row">
             <p class="col">Valor: </p>
             <p class="col" th:text="${compra.valor}"/>
@@ -29,10 +33,6 @@
         <div class="salvo my-3 row ">
             <p class="col" >Data: </p>
             <p class="col" th:text="${#temporals.format(compra.dataCompra, 'dd/MM/yy')}"/>
-        </div>
-        <div class="salvo my-3 row ">
-            <p class="col">Fornecedor: </p>
-            <p class="col" th:text="${compra.fornecedor}"/>
         </div>
     </div>
 

@@ -9,10 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -43,5 +40,11 @@ public class CompraController {
         model.addAttribute("compras", compraService.listarCompras(mes));
         model.addAttribute("meses", DateUtil.listarMeses());
         return "compra/comprasDoMes";
+    }
+
+    @GetMapping("/compras/{id}")
+    public String listarPagamentos(Model model, @PathVariable Long id) {
+        model.addAttribute("compra", compraService.findById(id));
+        return "compra/compraResult";
     }
 }

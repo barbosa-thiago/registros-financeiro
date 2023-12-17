@@ -19,7 +19,7 @@ function appendChildToDiv() {
             <div class="col-2">
                 <input id="preco-produto-display" 
                 class="form-control produto-input-altera-preco input-altera-valor currency-input" 
-                type="text" required="true" value="0.00"/>
+                type="text" required="true" />
             </div>
             <div class="col-2">
                 <input id="subtotal-produto-display" class="form-control subtotal only-numbers" onchange="updateTotal()" type="text" required="true" readonly/>
@@ -57,7 +57,6 @@ function postProduto() {
             window.location.href = "compras/list"
         },
         error: function (error) {
-            // Handle error response
             console.error('Error:', error);
         }
     });

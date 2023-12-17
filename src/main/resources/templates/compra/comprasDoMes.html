@@ -28,32 +28,42 @@
         <div class="table-result">
             <div class="table-head">
                 <table>
-                        <thead>
-                        <tr class="tb-row">
-                            <th>Fornecedor</th>
-                            <th>Valor</th>
-                            <th>Descricao</th>
-                            <th>Data</th>
-                        </tr>
+                    <thead>
+                    <tr class="tb-row">
+                        <th>Fornecedor</th>
+                        <th>Valor</th>
+                        <th>Agendado</th>
+                        <th>Data</th>
+                    </tr>
 
-                        </thead>
+                    </thead>
 
-                        <tbody>
-                        <tr th:if="${compras.empty}">
-                            <td colspan="4">Sem compras</td>
-                        </tr>
-                        <tr th:each="compra : ${compras}">
+                    <tbody>
+                    <tr th:if="${compras.empty}">
+                        <td colspan="4">Sem compras</td>
+                    </tr>
+                    <div th:each="compra : ${compras}">
+                        <tr th:onclick="'compraDetalhe(\'' + ${compra.id} + '\')'">
                             <td th:text="${compra.fornecedor}"></td>
                             <td th:text="${compra.valor}"></td>
-                            <td th:text="${compra.descricao}"></td>
+                            <td th:text="${compra.agendado ? 'sim':'nao'}"></td>
                             <td th:text="${#temporals.format(compra.dataCompra, 'dd/MM/yy')}"></td>
                         </tr>
+                    </div>
                 </table>
+                <p><i class="fas fa-rocket"></i>Mann</p>
 
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    function compraDetalhe(id) {
+        console.log("id" + id);
+        window.location.href = `/compras/${id}`;
+    }
+</script>
 
 </body>
 </html>

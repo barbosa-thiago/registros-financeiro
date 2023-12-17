@@ -16,12 +16,14 @@
             src="https://code.jquery.com/jquery-3.7.1.min.js"
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
             crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+          integrity="sha384-GLhlTQ8iNl4i6TQUHXLlQ6YFXYK3URuPnHhl5iS9e9t0Eva/6p2xrn5uPP+JK1T"
+          crossorigin="anonymous">
 
     <script th:src="@{/js/appendprodutocompra.js}" type="text/javascript"></script>
     <script th:src="@{/js/clearValue.js}" type="text/javascript"></script>
     <script th:src="@{/js/handleCurrencyInput.js}" type="text/javascript"></script>
     <script th:src="@{/js/onlyNumber.js}" type="text/javascript"></script>
-
 
 </head>
 
@@ -39,17 +41,17 @@
         <input id="compra-fornecedor-display" class="form-control" type="text" required="true" th:field="*{fornecedor}"/>
     </div>
 
-    <div class="mb-3">
+    <div>
         <label class="form-label" th:text="Descricao"/>
         <input id="compra-descricao-display" class="form-control" type="text" required="true" th:field="*{descricao}"/>
     </div>
 
     <div id="produto-list-container" class="produto-list-container">
         <div id="produto-label" class="mb-3 row justify-content-start" hidden>
-            <div class="col">
+            <div id="add-produto-input" class="col">
                 <label class="form-label">Produto</label>
             </div>
-            <div class="col-2">
+            <div class="col-3">
                 <label class="form-label">Quantidade</label>
             </div>
             <div class="col-2">
@@ -68,13 +70,13 @@
         <input class="form-control col-xs-2 only-numbers" type="text" readonly id="total" />
     </div>
 
-    <div id="produtos">
+    <div id="produtos" class="text-center">
         <button class="btn btn-secondary"
                 type="button"
                 onclick="appendChildToDiv()">Adicionar Produtos</button>
     </div>
 
-    <div class="text-center">
+    <div class="text-center mt-4">
         <button class="btn btn-primary" onclick="postProduto()"  type="button">Salvar</button>
     </div>
 </form>
