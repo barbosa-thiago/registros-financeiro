@@ -35,19 +35,7 @@ public class DateUtil {
             month = Month.valueOf(Month.class, mes.toUpperCase());
             primeiroDiaPesquisa = LocalDate.of(Year.now().getValue(), month, 1);
         } else {
-            primeiroDiaPesquisa = LocalDate.now().minusDays(3);
-        }
-        return primeiroDiaPesquisa;
-    }
-
-    public static LocalDate getPrimeiroDiaMes(String mes, LocalDate defaultStart) {
-        LocalDate primeiroDiaPesquisa = null;
-        Month month = null;
-        if (nonNull(mes)) {
-            month = Month.valueOf(Month.class, mes.toUpperCase());
-            primeiroDiaPesquisa = LocalDate.of(Year.now().getValue(), month, 1);
-        } else {
-            primeiroDiaPesquisa = defaultStart;
+            primeiroDiaPesquisa = LocalDate.now().minusMonths(1);
         }
         return primeiroDiaPesquisa;
     }

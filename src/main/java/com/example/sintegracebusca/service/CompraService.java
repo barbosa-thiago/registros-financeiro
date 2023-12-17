@@ -38,7 +38,7 @@ public class CompraService {
     }
 
     public List<Compra> listarCompras(String mes) {
-        LocalDate primeiroDiaPesquisa = DateUtil.getPrimeiroDiaMes(mes, LocalDate.now().minusMonths(1));
+        LocalDate primeiroDiaPesquisa = DateUtil.getPrimeiroDiaMes(mes);
         LocalDate ultimoDiaPesquisa = DateUtil.getUltimoDiaMes(mes);
 
         return compraRepository.findByDataPagamentoMonth(primeiroDiaPesquisa, ultimoDiaPesquisa);

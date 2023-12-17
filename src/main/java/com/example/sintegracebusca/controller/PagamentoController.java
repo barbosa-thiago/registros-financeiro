@@ -1,5 +1,6 @@
 package com.example.sintegracebusca.controller;
 
+import com.example.sintegracebusca.domain.Compra;
 import com.example.sintegracebusca.domain.Pagamento;
 import com.example.sintegracebusca.service.AgendamentoService;
 import com.example.sintegracebusca.service.CompraService;
@@ -26,6 +27,7 @@ public class PagamentoController {
         model.addAttribute("pagamentos", pagamentoService.pagamentosDashboard(null));
         model.addAttribute("agendamento", agendamentoService.agendamentoDashboard());
         model.addAttribute("comprasNaoAgendadas", compraService.comprasNaoAgendadas().size());
+        model.addAttribute("comprasUltimos30Dias", compraService.listarCompras(null).stream().mapToDouble(Compra::getValor).sum());
 
         return "dashboard";
     }
