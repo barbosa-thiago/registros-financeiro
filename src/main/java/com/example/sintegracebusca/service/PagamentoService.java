@@ -24,4 +24,10 @@ public class PagamentoService {
 
         return pagamentoRepository.findByDataPagamentoMonth(primeiroDiaPesquisa, ultimoDiaPesquisa);
     }
+
+    public Double pagamentosDashboard(String mes) {
+
+        return pagamentoRepository.findByDataPagamentoMonth(LocalDate.now().minusMonths(1), LocalDate.now()).stream()
+            .mapToDouble(Pagamento::getValor).sum();
+    }
 }

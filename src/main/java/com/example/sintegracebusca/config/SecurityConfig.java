@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
                 .formLogin()
                 .loginPage("/login")
-            .defaultSuccessUrl("/agendamentos/list")
+            .defaultSuccessUrl("/dashboard")
             .and()
             .sessionManagement()
             .maximumSessions(1)

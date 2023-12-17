@@ -71,6 +71,11 @@ public class AgendamentoService {
         return agendamentoRepository.save(agendamento);
     }
 
+    public Double agendamentoDashboard() {
+        return agendamentoRepository.findByDataPagamentoMonth(LocalDate.now(), LocalDate.now().plusMonths(1)).stream()
+            .mapToDouble(Agendamento::getValor).sum();
+    }
+
     public Agendamento findByID(Long id) {
         return agendamentoRepository.findById(id)
             .orElseThrow(() ->

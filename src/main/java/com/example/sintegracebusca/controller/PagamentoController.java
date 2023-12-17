@@ -20,6 +20,16 @@ public class PagamentoController {
     private final CompraService compraService;
     private final AgendamentoService agendamentoService;
 
+    @GetMapping("/dashboard")
+    public String dashboard(Model model) {
+
+        model.addAttribute("pagamentos", pagamentoService.pagamentosDashboard(null));
+        model.addAttribute("agendamento", agendamentoService.agendamentoDashboard());
+        model.addAttribute("comprasNaoAgendadas", compraService.comprasNaoAgendadas().size());
+
+        return "dashboard";
+    }
+
     @GetMapping("/pagamentos")
     public String save(Model model) {
         model.addAttribute("pagamento", new Pagamento());
