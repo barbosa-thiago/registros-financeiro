@@ -8,19 +8,21 @@ header {
     display: flex;
     align-items: center;
     z-index: 1000;
+    box-sizing: border-box;
 }
 header ul li {
     margin: 1vw 1vw 1vw 0;
     text-align:center;
 }
 
-header ul {
-    display:flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-left: -30px;
-    max-width: 650px;
-}
+/*header ul {*/
+/*    display:flex;*/
+/*    justify-content: space-around;*/
+/*    align-items: center;*/
+/*    margin-left: -30px;*/
+/*    max-width: 650px;*/
+/*    !*overflow: scroll;*!*/
+/*}*/
 
 header a {
     text-decoration: none !important;

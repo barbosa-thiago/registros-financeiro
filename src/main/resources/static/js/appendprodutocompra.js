@@ -8,21 +8,21 @@ function appendChildToDiv() {
     childListContainer.append(
         `<div id="produto-input" class="produto-inputs mb-3 row justify-content-start">
     
-            <div class="col">
+            <div class="col px-0">
                 <input id="nome-produto-display" class="form-control" type="text" required="true" />
             </div>
-            <div class="col-2">
+            <div class="col-2 px-1">
                 <input id="quantidade-produto-display" 
-                class="form-control produto-input-altera-quant input-altera-valor only-numbers" 
+                class="produto-prop form-control produto-input-altera-quant input-altera-valor only-numbers" 
                 type="text" required="true" />
             </div>
-            <div class="col-2">
+            <div class="col-2 px-1">
                 <input id="preco-produto-display" 
-                class="form-control produto-input-altera-preco input-altera-valor currency-input" 
+                class="produto-prop form-control produto-input-altera-preco input-altera-valor currency-input" 
                 type="text" required="true" />
             </div>
-            <div class="col-2">
-                <input id="subtotal-produto-display" class="form-control subtotal only-numbers" onchange="updateTotal()" type="text" required="true" readonly/>
+            <div class="col-2 px-1">
+                <input id="produto-prop subtotal-produto-display" class="form-control subtotal only-numbers" onchange="updateTotal()" type="text" required="true" readonly/>
             </div>
         </div>`
     )
