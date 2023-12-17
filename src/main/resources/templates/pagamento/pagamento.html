@@ -19,6 +19,7 @@
     <div class="mb-3">
         <label class="form-label" th:text="Tipo" />
         <select class="form-select" id="tipoList" th:field="*{tipo}" name="Tipo">
+            <option value="0">selecione o tipo</option>
             <option th:each="option : ${T(com.example.sintegracebusca.enums.TipoPagamento).values()}"
                     th:value="${option}" th:text="${option}"></option>
         </select>

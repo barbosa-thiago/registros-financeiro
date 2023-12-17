@@ -4,7 +4,7 @@
 </head>
 <body>
 <div th:include="fragments/navbar :: header"></div>
-<div class="result">
+<div class="result details">
     <h3 class="m-4">Agendamento Registrado</h3>
     <div class="reg-body vw-30">
         <div class="salvo my-3 row">
@@ -13,7 +13,7 @@
             <p class="col" th:text="${agendamento.valor}"/>
         </div>
         <div class="salvo my-3 row ">
-            <p class="col" >Data: </p>
+            <p class="col">Data: </p>
             <p class="col" th:text="${#temporals.format(agendamento.dataPagamento, 'dd/MM/yy')}"/>
         </div>
         <div class="salvo my-3 row ">
@@ -22,7 +22,9 @@
         </div>
     </div>
 
-    <a class="btn btn-primary voltar" href="/agendamentos/list">Ver agendamentos do mês</a>
+    <div class="d-flex justify-content-end">
+        <a class="btn btn-primary voltar" href="/agendamentos/list">Ver agendamentos do mês</a>
+    </div>
 </div>
 
 </body>

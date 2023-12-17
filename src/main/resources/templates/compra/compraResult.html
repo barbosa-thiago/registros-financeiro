@@ -4,7 +4,7 @@
 <body>
 <div th:include="fragments/navbar :: header"></div>
 
-<div class="result">
+<div class="result details">
     <h3 class="m-4">Compra Registrada</h3>
     <div class="reg-body vw-30">
         <div class="salvo my-3 row ">
@@ -20,19 +20,21 @@
             <p class="col" th:text="${compra.descricao}"/>
         </div>
         <div class="salvo my-3 row ">
-            <p class="col" >Data: </p>
+            <p class="col">Data: </p>
             <p class="col" th:text="${#temporals.format(compra.dataCompra, 'dd/MM/yy')}"/>
         </div>
     </div>
 
 
+    <div class="d-flex justify-content-end">
 
-    <a class="btn btn-primary voltar" href="/compras/list">Ver compras do mês</a>
+        <a class="btn btn-primary voltar" href="/compras/list">Ver compras do mês</a>
+    </div>
 </div>
 
 <script>
-    if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
     }
 </script>
 
