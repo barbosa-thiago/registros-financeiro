@@ -1,6 +1,7 @@
 package com.example.sintegracebusca.domain;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,13 +14,8 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@SequenceGenerator(name = "INC_COMPRA_ID", sequenceName = "GEN_COMPRA_ID", allocationSize = 1)
-public class Compra implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "INC_COMPRA_ID")
-    Long id;
+@SuperBuilder
+public class Compra extends BaseEntity {
 
     @Column(name = "valor", nullable = false)
     Double valor;

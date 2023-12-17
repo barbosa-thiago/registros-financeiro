@@ -7,6 +7,7 @@ import com.example.sintegracebusca.service.CompraService;
 import com.example.sintegracebusca.service.PagamentoService;
 import com.example.sintegracebusca.util.DateUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,7 +42,11 @@ public class PagamentoController {
     }
 
 
-    @PostMapping("/pagamentos")
+    @PostMapping(path = "/pagamentos",
+        consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+        produces = {
+            MediaType.APPLICATION_ATOM_XML_VALUE,
+            MediaType.APPLICATION_JSON_VALUE})
     public String save(@RequestBody Pagamento pagamento, BindingResult bindingResult, Model model) {
         var pagamentoSalvo = pagamentoService.save(pagamento);
         if(isNull(pagamentoSalvo))

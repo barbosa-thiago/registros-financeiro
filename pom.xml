@@ -39,10 +39,15 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>org.firebirdsql.jdbc</groupId>-->
+<!--            <artifactId>jaybird</artifactId>-->
+<!--            <version>5.0.2.java11</version>-->
+<!--        </dependency>-->
+
         <dependency>
-            <groupId>org.firebirdsql.jdbc</groupId>
-            <artifactId>jaybird</artifactId>
-            <version>5.0.2.java11</version>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
         </dependency>
 
         <dependency>

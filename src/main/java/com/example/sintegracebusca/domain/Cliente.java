@@ -1,6 +1,7 @@
 package com.example.sintegracebusca.domain;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,13 +12,8 @@ import java.time.LocalDate;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@SequenceGenerator(name = "INC_CLIENTE", sequenceName = "GEN_CLIENTE_ID", allocationSize = 1)
-public class Cliente implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "INC_CLIENTE")
-    Long id;
+@SuperBuilder
+public class Cliente extends BaseEntity {
 
     @Column(name = "cnpj", unique = true, length = 14)
     String cnpj;

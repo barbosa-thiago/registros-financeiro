@@ -2,6 +2,7 @@ package com.example.sintegracebusca.domain;
 
 import com.example.sintegracebusca.enums.TipoPagamento;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,13 +12,8 @@ import java.time.LocalDate;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@SequenceGenerator(name = "INC_PAGAMENTO_ID", sequenceName = "GEN_ID_PAGAMENTO", allocationSize = 1)
-public class Pagamento {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "INC_PAGAMENTO_ID")
-    Long id;
+@SuperBuilder
+public class Pagamento extends BaseEntity{
 
     @Column(name = "valor", nullable = false)
     Double valor;

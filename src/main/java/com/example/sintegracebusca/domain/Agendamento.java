@@ -1,6 +1,7 @@
 package com.example.sintegracebusca.domain;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -11,13 +12,8 @@ import java.time.LocalDate;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@SequenceGenerator(name = "INC_AGENDAMENTO", sequenceName = "GEN_AGENDAMENTO_ID", allocationSize = 1)
-public class Agendamento {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "INC_AGENDAMENTO")
-    Long id;
+@SuperBuilder
+public class Agendamento extends BaseEntity {
 
     @Column(name = "data_pagamento", nullable = false)
     @DateTimeFormat(pattern = "dd/MM/yyyy")

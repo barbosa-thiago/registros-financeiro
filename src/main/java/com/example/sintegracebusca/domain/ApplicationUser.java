@@ -2,6 +2,7 @@ package com.example.sintegracebusca.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,26 +13,24 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@SequenceGenerator(name = "INC_USER", sequenceName = "GEN_USER_ID", allocationSize = 1)
-public class ApplicationUser {
+public class ApplicationUser extends BaseEntity{
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "INC_USER")
-    @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull(message = "The field 'username' is mandatory")
+    @NotNull(message = "'username' é obrigatório")
     @Column(nullable = false)
     private String username;
-    @NotNull(message = "The field 'password' is mandatory")
+    @NotNull(message = "'password' é obrigatório")
     @Column(nullable = false)
     @ToString.Exclude
     private String password;
-    @NotNull(message = "The field 'role' is mandatory")
+    @NotNull(message = "'role' é obrigatório")
     @Column(nullable = false)
     @Builder.Default
     private String role = "USER";
