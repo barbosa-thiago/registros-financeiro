@@ -2,8 +2,11 @@ package com.example.sintegracebusca.service;
 
 import com.example.sintegracebusca.domain.Agendamento;
 import com.example.sintegracebusca.domain.Pagamento;
+import com.example.sintegracebusca.dto.AgendamentoDTO;
 import com.example.sintegracebusca.dto.AgendamentoTotalDia;
 import com.example.sintegracebusca.dto.DataTotalPagamentos;
+import com.example.sintegracebusca.dto.PagamentoDTO;
+import com.example.sintegracebusca.mapper.AgendamentoMapper;
 import com.example.sintegracebusca.repository.AgendamentoRepository;
 import com.example.sintegracebusca.util.DateUtil;
 import lombok.RequiredArgsConstructor;
@@ -25,10 +28,12 @@ import static java.util.Objects.nonNull;
 public class AgendamentoService {
 
     private final PagamentoService pagamentoService;
+    private final AgendamentoMapper mapper;
 
     private final AgendamentoRepository agendamentoRepository;
 
-    public Agendamento save(Agendamento agendamento) {
+    public Agendamento save(AgendamentoDTO agendamentoDTO) {
+        var agendamento = mapper.dtoToAgendamento(agendamentoDTO);
         return agendamentoRepository.save(agendamento);
     }
 
@@ -60,7 +65,7 @@ public class AgendamentoService {
     }
 
     @Transactional
-    public Agendamento update(Long id, Pagamento pagamento) {
+    public Agendamento update(Long id, PagamentoDTO pagamento) {
         Agendamento agendamento = findByID(id);
         if(nonNull(agendamento.getPagamento())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Agendamento já foi pago");

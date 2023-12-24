@@ -1,7 +1,8 @@
 package com.example.sintegracebusca.controller;
 
 import com.example.sintegracebusca.domain.Agendamento;
-import com.example.sintegracebusca.domain.Pagamento;
+import com.example.sintegracebusca.dto.AgendamentoDTO;
+import com.example.sintegracebusca.dto.PagamentoDTO;
 import com.example.sintegracebusca.service.AgendamentoService;
 import com.example.sintegracebusca.util.DateUtil;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +26,9 @@ public class AgendamentoController {
     }
 
     @PostMapping("/agendamentos")
-    public String save(@ModelAttribute Agendamento agendamento, BindingResult bindingResult, Model model) {
-        var agendamentoSalvo = agendamentoService.save(agendamento);
+    public String save(@ModelAttribute AgendamentoDTO agendamentoDTO, BindingResult bindingResult, Model model) {
+        var agendamentoSalvo = agendamentoService.save(agendamentoDTO);
+        //TODO checagem é necessaria?
         if (isNull(agendamentoSalvo))
             return "erro";
         model.addAttribute("agendamento", agendamentoSalvo);
@@ -51,7 +53,7 @@ public class AgendamentoController {
 
     @PostMapping("/agendamentos/update/{id}")
     public String update(@PathVariable Long id,
-                         @RequestBody Pagamento pagamento) {
+                         @RequestBody PagamentoDTO pagamento) {
 
         agendamentoService.update(id, pagamento);
         return "redirect:/agendamentos/list";

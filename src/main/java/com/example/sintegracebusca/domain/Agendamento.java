@@ -26,10 +26,9 @@ public class Agendamento extends BaseEntity {
     String fornecedor;
 
     @Column(name = "pago")
-    Boolean pago = false;
+    Boolean pago;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pagamento_id")
     Pagamento pagamento;
 
     @ManyToOne(fetch = FetchType.LAZY)
