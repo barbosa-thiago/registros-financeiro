@@ -1,11 +1,13 @@
 package com.example.sintegracebusca.domain;
 
 import com.example.sintegracebusca.enums.TipoPagamento;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -17,9 +19,6 @@ public class Pagamento extends BaseEntity{
 
     @Column(name = "valor", nullable = false)
     Double valor;
-
-    @Column(name = "data_pagamento")
-    LocalDate dataPagamento = LocalDate.now();
 
     @Column(name = "pag_descricao", length = 150)
     String descricao;

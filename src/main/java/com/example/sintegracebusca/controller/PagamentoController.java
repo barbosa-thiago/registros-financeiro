@@ -1,13 +1,12 @@
 package com.example.sintegracebusca.controller;
 
 import com.example.sintegracebusca.domain.Compra;
-import com.example.sintegracebusca.domain.Pagamento;
+import com.example.sintegracebusca.dto.PagamentoDTO;
 import com.example.sintegracebusca.service.AgendamentoService;
 import com.example.sintegracebusca.service.CompraService;
 import com.example.sintegracebusca.service.PagamentoService;
 import com.example.sintegracebusca.util.DateUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,7 +24,9 @@ public class PagamentoController {
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
 
-        model.addAttribute("pagamentos", pagamentoService.pagamentosDashboard(null));
+        Double pagamentosDashboard = pagamentoService.pagamentosDashboard();
+
+        model.addAttribute("pagamentos", pagamentoService.pagamentosDashboard());
         model.addAttribute("agendamento", agendamentoService.agendamentoDashboard());
         model.addAttribute("comprasNaoAgendadas", compraService.comprasNaoAgendadas().size());
         model.addAttribute("comprasUltimos30Dias", compraService.listarCompras(null).stream().mapToDouble(Compra::getValor).sum());
@@ -35,20 +36,16 @@ public class PagamentoController {
 
     @GetMapping("/pagamentos")
     public String save(Model model) {
-        model.addAttribute("pagamento", new Pagamento());
+        model.addAttribute("pagamento", PagamentoDTO.builder().build());
         model.addAttribute("compras", compraService.listarCompras(null));
 
         return "pagamento/pagamento";
     }
 
 
-    @PostMapping(path = "/pagamentos",
-        consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
-        produces = {
-            MediaType.APPLICATION_ATOM_XML_VALUE,
-            MediaType.APPLICATION_JSON_VALUE})
-    public String save(@RequestBody Pagamento pagamento, BindingResult bindingResult, Model model) {
-        var pagamentoSalvo = pagamentoService.save(pagamento);
+    @PostMapping("/pagamentos")
+    public String save(@RequestBody @ModelAttribute PagamentoDTO pagamentoDTO, BindingResult bindingResult, Model model) {
+        var pagamentoSalvo = pagamentoService.save(pagamentoDTO);
         if(isNull(pagamentoSalvo))
             return "erro";
         model.addAttribute("pagamento", pagamentoSalvo);
@@ -60,5 +57,11 @@ public class PagamentoController {
         model.addAttribute("pagamentos", pagamentoService.listarPagamentos(mes));
         model.addAttribute("meses", DateUtil.listarMeses());
         return "pagamento/pagamentosDoMes";
+    }
+
+    @GetMapping("/pagamentos/{id}")
+    public String listarPagamentos(Model model, @PathVariable Long id) {
+        model.addAttribute("pagamento", pagamentoService.findById(id));
+        return "pagamento/pagamentoResult";
     }
 }
