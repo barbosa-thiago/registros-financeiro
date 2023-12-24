@@ -6,36 +6,59 @@
 <div th:include="fragments/navbar :: header"></div>
 <h2 id="title" class="text-center">Cadastro de Pagamentos</h2>
 
-<form action="#" th:action="@{/pagamentos}" th:object="${pagamento}" method="post">
-    <div class="mb-3">
-<!--        <label class="form-label" th:text="${#numbers.formatCurrency(valor)}" />-->
-        <label class="form-label" th:text="Valor" />
-        <input class="form-control" type="text" required="true" th:field="*{valor}" />
+<form action="#" th:action="@{/pagamentos}" onsubmit="replacePonto()" th:object="${pagamento}" method="post">
+    <div class="mb-3 row g-3">
+        <div class="col-sm-4">
+        <label class="form-label" for="input-valor-pagamento" th:text="Valor"/>
+        <input id="input-valor-pagamento" class="form-control currency-input" type="text" required="true"
+               th:field="*{valor}"/>
+        </div>
     </div>
     <div class="mb-3">
-        <label class="form-label" th:text="Descricao" />
-        <input class="form-control" type="text" required="true" th:field="*{descricao}" />
+        <label class="form-label" th:text="Descricao"/>
+        <input class="form-control" type="text" required="true" th:field="*{descricao}"/>
     </div>
     <div class="mb-3">
-        <label class="form-label" th:text="Tipo" />
-        <select class="form-select" id="tipoList" th:field="*{tipo}" name="Tipo">
+        <label class="form-label" th:text="Tipo"/>
+        <select th:id="tipo-de-compra-select" class="form-select" id="tipoList" th:field="*{tipo}" name="Tipo">
             <option value="0">selecione o tipo</option>
             <option th:each="option : ${T(com.example.sintegracebusca.enums.TipoPagamento).values()}"
                     th:value="${option}" th:text="${option}"></option>
         </select>
     </div>
 
-    <div class="mb-3">
+    <div id="select-compra" class="mb-3" hidden>
         <label class="form-label" th:text="Compra"/>
-        <select class="form-select mt-3" id="compraList" name="Compra">
+        <select class="form-select mt-3" id="compraList" th:field="*{compraId}" name="Compra">
             <option value="0">selecione a compra</option>
             <option th:each="compra : ${compras}"
-                    th:value="${compra.id}" th:text="${compra.fornecedor +' - '+ compra.valor +' - '+ compra.dataCompra}"></option>
+                    th:value="${compra.id}"
+                    th:text="${compra.fornecedor +' - '+ compra.valor +' - '+ compra.dataCompra}"></option>
         </select>
     </div>
     <div class="text-center m-5">
         <button class="btn btn-primary" type="submit">Salvar</button>
     </div>
 </form>
+
+<script>
+    $(document).on("change", "#tipo-de-compra-select", function () {
+        console.log($(this).find(":selected").val());
+
+        if ($(this).find(":selected").val() === "FORNECEDOR") {
+            $("#select-compra").removeAttr("hidden");
+        } else {
+            console.log("else")
+            $("#select-compra").attr("hidden", true);
+        }
+
+    });
+
+    function replacePonto() {
+        console.log("replace ponto");
+
+        $("#input-valor-pagamento").val($("#input-valor-pagamento").val());
+    }
+</script>
 </body>
 </html>

@@ -20,7 +20,7 @@
     <div class="mb-3">
         <!--        <label class="form-label" th:text="${#numbers.formatCurrency(valor)}" />-->
         <label class="form-label" th:text="Valor" />
-        <input class="form-control valor" type="text" required="true" autocomplete="off" th:field="*{valor}" />
+        <input class="form-control valor currency-input" type="text" required="true" autocomplete="off" th:field="*{valor}" />
     </div>
     <div class="mb-3">
         <label class="form-label" th:text="Data" />

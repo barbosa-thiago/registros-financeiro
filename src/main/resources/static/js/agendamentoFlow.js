@@ -46,7 +46,7 @@ function submitChildForm() {
         contentType: 'application/json',
         data: JSON.stringify(pagamento),
         success: function (response) {
-            console.log('Success:', response.getStats());
+            console.log('Success: agendamento atualizado');
             window.location.reload();
         },
         error: function(xhr, status, error) {

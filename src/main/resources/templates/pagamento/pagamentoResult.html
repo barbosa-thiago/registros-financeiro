@@ -18,7 +18,7 @@
         </div>
         <div class="salvo my-3 row ">
             <p class="col" >Data: </p>
-            <p class="col" th:text="${#temporals.format(pagamento.dataPagamento, 'dd/MM/yy')}"/>
+            <p class="col" th:text="${#temporals.format(pagamento.createdAt, 'dd/MM/yy')}"/>
         </div>
     </div>
 

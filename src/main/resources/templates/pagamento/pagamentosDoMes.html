@@ -36,19 +36,29 @@
                     <tr th:if="${pagamentos.empty}">
                         <td colspan="4">Sem pagamentos</td>
                     </tr>
-                    <tr th:each="pagamento : ${pagamentos}">
-                        <td th:text="${pagamento.descricao}"></td>
-                        <td th:text="${pagamento.valor}"></td>
-                        <td th:text="${pagamento.compra} ? ${pagamento.compra.fornecedor} : ''"></td>
-                        <td th:text="${#temporals.format(pagamento.dataPagamento, 'dd/MM/yy')}"></td>
+                    <div th:each="pagamento : ${pagamentos}">
+                        <tr th:onclick="'pagamentoDetalhe(\'' + ${pagamento.id} + '\')'">
+                            <td th:text="${pagamento.descricao}"></td>
+                            <td th:text="${pagamento.valor}"></td>
+                            <td th:text="${pagamento.compra} ? ${pagamento.compra.fornecedor} : ''"></td>
+                            <td th:text="${#temporals.format(pagamento.createdAt, 'dd/MM/yy')}"></td>
 
-                    </tr>
+
+                        </tr>
+                    </div>
 
                 </table>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    function pagamentoDetalhe(id) {
+        console.log("id" + id);
+        window.location.href = `/pagamentos/${id}`;
+    }
+</script>
 
 </body>
 </html>

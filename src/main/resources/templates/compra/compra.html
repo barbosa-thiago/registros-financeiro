@@ -13,13 +13,13 @@
 <form id="form-prod" action="#" th:action="@{/compras}" th:object="${compra}" method="post">
     <div class="mb-3">
         <label class="form-label" th:text="Fornecedor"/>
-        <input id="compra-fornecedor-display" class="form-control" type="text" required="true"
+        <input id="compra-fornecedor-display" class="form-control" type="text" required
                th:field="*{fornecedor}"/>
     </div>
 
     <div>
         <label class="form-label" th:text="Descricao"/>
-        <input id="compra-descricao-display" class="form-control" type="text" required="true" th:field="*{descricao}"/>
+        <input id="compra-descricao-display" class="form-control" type="text" th:field="*{descricao}" required/>
     </div>
 
     <div id="produto-list-container" class="produto-list-container">
@@ -65,21 +65,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    $(document.body).on('input', ".input-altera-valor", function (event) {
 
-        let elementoPai = $(event.target).parent().parent();
-
-        let prodQuant = elementoPai.find(".produto-input-altera-quant");
-        let prodPreco = elementoPai.find(".produto-input-altera-preco");
-
-        elementoPai.find(".subtotal").val(prodPreco.val() * prodQuant.val());
-
-        let soma = 0;
-        Array.from($(".subtotal")).forEach((el) => soma += parseFloat(el.value));
-
-        $("#total").val(soma);
-
-    });
 </script>
 </body>
 </html>

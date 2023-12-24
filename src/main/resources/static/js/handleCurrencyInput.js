@@ -3,15 +3,34 @@ $(document).ready(function () {
 })
 
 $(document).on("input", ".currency-input", function () {
-    let inputValue = $(this).val();
 
-    inputValue = inputValue.replace(/[^0-9.]/g, '');
-    inputValue = inputValue.replace(',', '.');
+    let value = this.value;
+    value = value.replace('.', '').replace(',', '').replace(/\D/g, '');
 
-    let periodPosition = inputValue.indexOf('.');
-    if (periodPosition !== -1) {
-        inputValue = inputValue.slice(0, periodPosition + 1) + inputValue.slice(periodPosition + 1).replace(/\./g, '');
-    }
 
-    $(this).val(inputValue);
+    const options = { minimumFractionDigits: 2 }
+    const inputDecimal = parseFloat(value) / 100;
+    this.value = new Intl.NumberFormat('en-US', options).format(inputDecimal);
 });
+
+
+
+$(document).on('input', ".input-altera-valor", function (event) {
+    let elementoPai = $(event.target).parent().parent();
+    let prodQuant = elementoPai.find(".produto-input-altera-quant");
+
+    let prodPreco = elementoPai.find(".produto-input-altera-preco");
+
+    let subtotal = (prodPreco.val().replace(",", ".") * prodQuant.val());
+    elementoPai.find(".subtotal").val(roundTwoDecimalPlaces(parseFloat(subtotal)));
+
+    let soma = 0;
+    Array.from($(".subtotal")).forEach((el) => soma += parseFloat(el.value));
+
+    $("#total").val(roundTwoDecimalPlaces(soma));
+});
+
+function roundTwoDecimalPlaces(value) {
+    const multiplier = Math.pow(10, 2);
+    return Math.round(value * multiplier) / multiplier;
+}
