@@ -1,0 +1,21 @@
+
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+
+  datasource:
+#    url: jdbc:firebirdsql:${DB_HOST}/${DB_PORT}:controle.db?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false
+    url: jdbc:postgresql://${DB_HOST_PRD}:${DB_PORT}/controle?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false
+
+    username: ${DATABASE_USER_PRD}
+    password: ${DATABASE_PASSWORD_PRD}
+server:
+  servlet:
+    session:
+      timeout: 15m
+hibernate:
+  dialect: org.hibernate.dialect.PostgreSQL9Dialect

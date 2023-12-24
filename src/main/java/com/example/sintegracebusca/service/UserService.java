@@ -24,14 +24,13 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
         ApplicationUser applicationUser = applicationUserRepository.findByUsername(username);
 
-        log.info("ApplicationUser found '{}'", applicationUser);
-
-        if (applicationUser == null)
+        if (applicationUser == null) {
             throw new UsernameNotFoundException(String.format("Application user '%s' not found", username));
+        }
 
+        log.info("ApplicationUser found '{}'", applicationUser.getUsername());
         return new CustomUserDetails(applicationUser);
     }
 
