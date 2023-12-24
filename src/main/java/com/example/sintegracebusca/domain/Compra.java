@@ -12,6 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
@@ -38,7 +39,7 @@ public class Compra extends BaseEntity {
     @OneToMany(fetch = FetchType.LAZY)
     List<Pagamento> pagamentos = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "compra")
     List<Agendamento> agendamentos = new ArrayList<>();
 
     @Column(name = "agendado")
