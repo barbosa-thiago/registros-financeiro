@@ -6,7 +6,6 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.7.6</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
     <artifactId>sintegra-ce-busca</artifactId>
@@ -42,12 +41,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>org.firebirdsql.jdbc</groupId>-->
-<!--            <artifactId>jaybird</artifactId>-->
-<!--            <version>5.0.2.java11</version>-->
-<!--        </dependency>-->
 
         <dependency>
             <groupId>org.postgresql</groupId>
