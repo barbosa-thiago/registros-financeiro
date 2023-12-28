@@ -1,9 +1,9 @@
 package com.example.sintegracebusca.controller;
 
-import com.example.sintegracebusca.domain.Agendamento;
 import com.example.sintegracebusca.dto.AgendamentoDTO;
 import com.example.sintegracebusca.dto.PagamentoDTO;
 import com.example.sintegracebusca.service.AgendamentoService;
+import com.example.sintegracebusca.service.CompraService;
 import com.example.sintegracebusca.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -18,10 +18,12 @@ import static java.util.Objects.isNull;
 public class AgendamentoController {
 
     private final AgendamentoService agendamentoService;
+    private final CompraService compraService;
 
     @GetMapping("/agendamentos")
     public String save(Model model) {
-        model.addAttribute("agendamento", new Agendamento());
+        model.addAttribute("agendamento", AgendamentoDTO.builder().build());
+        model.addAttribute("compras", compraService.listarCompras(null));
         return "agendamento/agendamento";
     }
 
@@ -40,7 +42,7 @@ public class AgendamentoController {
         var agendamentoMap = agendamentoService.listAgendamento(mes);
 
         model.addAttribute("somaMap", agendamentoMap);
-        model.addAttribute("agendamento", new Agendamento());
+        model.addAttribute("agendamento", AgendamentoDTO.builder().build());
         model.addAttribute("meses", DateUtil.listarMeses());
 
 

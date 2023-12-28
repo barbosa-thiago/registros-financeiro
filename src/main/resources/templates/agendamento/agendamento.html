@@ -27,6 +27,8 @@
         <input class="form-control datepicker" type="text" required="true" autocomplete="off" th:field="*{dataPagamento}" id="datepicker"/>
     </div>
 
+    <div th:replace="fragments/selectCompra :: div"></div>
+
     <script>
         $(function() {
             $("#datepicker").on('click').datepicker({

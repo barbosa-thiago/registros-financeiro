@@ -2,6 +2,8 @@ package com.example.sintegracebusca.controller;
 
 import com.example.sintegracebusca.domain.Compra;
 import com.example.sintegracebusca.domain.Produto;
+import com.example.sintegracebusca.dto.AgendamentoDTO;
+import com.example.sintegracebusca.service.AgendamentoService;
 import com.example.sintegracebusca.service.CompraService;
 import com.example.sintegracebusca.util.DateUtil;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class CompraController {
     private final CompraService compraService;
+    private final AgendamentoService agendamentoService;
 
     @GetMapping("/compras")
     public String save(Model model) {
@@ -44,6 +47,7 @@ public class CompraController {
 
     @GetMapping("/compras/{id}")
     public String listarPagamentos(Model model, @PathVariable Long id) {
+        model.addAttribute("agendamento", AgendamentoDTO.builder().build());
         model.addAttribute("compra", compraService.findById(id));
         return "compra/compraResult";
     }
