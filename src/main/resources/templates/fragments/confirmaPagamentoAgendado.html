@@ -17,6 +17,9 @@
                     <label class="form-label" id="fornecedor-confirmacao-lb" for="fornecedor-pagamento-confirmacao">Fornecedor</label>
                     <input class="form-control w-20"  required autocomplete="off" type="text" name="tipo-pagamento-confirmacao" id="fornecedor-pagamento-confirmacao"/>
 
+                    <div th:replace="fragments/selectCompra :: div"></div>
+
+
                     <input type="hidden" name="pago" id="agendamento-foi-pago"/>
                     <input type="hidden" name="pago" id="pagando-agendamento-id"/>
 

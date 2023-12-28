@@ -2,41 +2,51 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head th:include="fragments/head"></head>
 <body>
-<div th:include="fragments/navbar :: header"></div>
+    <div th:include="fragments/navbar :: header"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<div class="result details">
-    <h3 class="m-4">Compra Registrada</h3>
-    <div class="reg-body vw-30">
-        <div class="salvo my-3 row ">
-            <p class="col">Fornecedor: </p>
-            <p class="col" th:text="${compra.fornecedor}"/>
+
+    <div class="result details">
+        <h3 class="m-4">Compra Registrada</h3>
+        <div class="reg-body vw-30">
+            <div class="salvo my-3 row ">
+                <p class="col">Fornecedor: </p>
+                <p class="col" th:text="${compra.fornecedor}"/>
+            </div>
+            <div class="salvo my-3 row">
+                <p class="col">Valor: </p>
+                <p class="col" th:text="${compra.valor}"/>
+            </div>
+            <div class="salvo my-3 row">
+                <p class="col">Descricao: </p>
+                <p class="col" th:text="${compra.descricao}"/>
+            </div>
+            <div class="salvo my-3 row ">
+                <p class="col">Data: </p>
+                <p class="col" th:text="${#temporals.format(compra.dataCompra, 'dd/MM/yy')}"/>
+            </div>
         </div>
-        <div class="salvo my-3 row">
-            <p class="col">Valor: </p>
-            <p class="col" th:text="${compra.valor}"/>
-        </div>
-        <div class="salvo my-3 row">
-            <p class="col">Descricao: </p>
-            <p class="col" th:text="${compra.descricao}"/>
-        </div>
-        <div class="salvo my-3 row ">
-            <p class="col">Data: </p>
-            <p class="col" th:text="${#temporals.format(compra.dataCompra, 'dd/MM/yy')}"/>
+
+
+        <div class="d-flex justify-content-between">
+            <button class="btn btn-success voltar"
+                    data-bs-toggle="modal"
+                    data-bs-target="#agendamento-modal"
+                    th:attr="data-agendamento-compra=${compra}"
+                    onclick="openModal(this)">Agendar pagamentos
+            </button>
+
+            <a class="btn btn-primary voltar" href="/compras/list">Ver compras do mês</a>
         </div>
     </div>
 
+    <div th:insert="fragments/agendamentomodal :: div"></div>
 
-    <div class="d-flex justify-content-end">
-
-        <a class="btn btn-primary voltar" href="/compras/list">Ver compras do mês</a>
-    </div>
-</div>
-
-<script>
-    if (window.history.replaceState) {
-        window.history.replaceState(null, null, window.location.href);
-    }
-</script>
+    <script>
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    </script>
 
 </body>
 </html>
