@@ -21,21 +21,13 @@
     <div class="mb-3">
         <label class="form-label" th:text="Tipo"/>
         <select th:id="tipo-de-compra-select" class="form-select" id="tipoList" th:field="*{tipo}" name="Tipo">
-            <option value="0">selecione o tipo</option>
             <option th:each="option : ${T(com.example.sintegracebusca.enums.TipoPagamento).values()}"
                     th:value="${option}" th:text="${option}"></option>
         </select>
     </div>
 
-    <div id="select-compra" class="mb-3" hidden>
-        <label class="form-label" th:text="Compra"/>
-        <select class="form-select mt-3" id="compraList" th:field="*{compraId}" name="Compra">
-            <option value="0">selecione a compra</option>
-            <option th:each="compra : ${compras}"
-                    th:value="${compra.id}"
-                    th:text="${compra.fornecedor +' - '+ compra.valor +' - '+ compra.dataCompra}"></option>
-        </select>
-    </div>
+    <div th:replace="fragments/selectCompra :: div"></div>
+
     <div class="text-center m-5">
         <button class="btn btn-primary" type="submit">Salvar</button>
     </div>
@@ -55,7 +47,6 @@
     });
 
     function replacePonto() {
-        console.log("replace ponto");
 
         $("#input-valor-pagamento").val($("#input-valor-pagamento").val());
     }

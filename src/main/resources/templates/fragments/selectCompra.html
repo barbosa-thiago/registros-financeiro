@@ -1,0 +1,9 @@
+<div id="select-compra" class="mb-3">
+    <label class="form-label" th:text="Compra"/>
+    <select class="form-select mt-3" id="compraList" th:field="*{compraId}" name="Compra">
+        <option value="0">selecione a compra</option>
+        <option th:each="compra : ${compras}"
+                th:value="${compra.id}"
+                th:text="${compra.fornecedor +' - '+ compra.valor +' - '+ compra.dataCompra}"></option>
+    </select>
+</div>
