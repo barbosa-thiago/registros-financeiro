@@ -1,4 +1,4 @@
-<div class="modal fade" id="meumodal">
+<div class="modal fade" id="agendamento-modal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -15,7 +15,7 @@
                     <input class="form-control" th:field="*{fornecedor}" required type="text" id="fornecedor-ag-modal"/>
 
                     <label class="form-label" id="valor-ag-label" for="valor-ag-modal">Valor</label>
-                    <input class="form-control w-20" th:field="*{valor}" required autocomplete="off" type="text" id="valor-ag-modal"/>
+                    <input class="form-control w-20 currency-input" th:field="*{valor}" required autocomplete="off" type="text" id="valor-ag-modal"/>
 
                     <div class="text-center my-3">
                         <button class="btn btn-primary" type="submit" >Salvar</button>
