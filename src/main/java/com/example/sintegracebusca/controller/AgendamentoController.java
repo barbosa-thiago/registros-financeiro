@@ -1,6 +1,7 @@
 package com.example.sintegracebusca.controller;
 
 import com.example.sintegracebusca.dto.AgendamentoDTO;
+import com.example.sintegracebusca.dto.AgendamentoReturnDTO;
 import com.example.sintegracebusca.dto.PagamentoDTO;
 import com.example.sintegracebusca.service.AgendamentoService;
 import com.example.sintegracebusca.service.CompraService;
@@ -42,9 +43,9 @@ public class AgendamentoController {
         var agendamentoMap = agendamentoService.listAgendamento(mes);
 
         model.addAttribute("somaMap", agendamentoMap);
-        model.addAttribute("agendamento", AgendamentoDTO.builder().build());
+        model.addAttribute("agendamento", AgendamentoReturnDTO.builder().build());
+        model.addAttribute("compras", compraService.listarCompras(null));
         model.addAttribute("meses", DateUtil.listarMeses());
-
 
 //        model.addAttribute("totalPages", agendamentoMap.getTotalPages());
 //        model.addAttribute("pageNumber", agendamentoMap.getNumber());

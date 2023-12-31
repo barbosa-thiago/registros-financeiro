@@ -1,11 +1,7 @@
 package com.example.sintegracebusca.service;
 
 import com.example.sintegracebusca.domain.Agendamento;
-import com.example.sintegracebusca.domain.Pagamento;
-import com.example.sintegracebusca.dto.AgendamentoDTO;
-import com.example.sintegracebusca.dto.AgendamentoTotalDia;
-import com.example.sintegracebusca.dto.DataTotalPagamentos;
-import com.example.sintegracebusca.dto.PagamentoDTO;
+import com.example.sintegracebusca.dto.*;
 import com.example.sintegracebusca.mapper.AgendamentoMapper;
 import com.example.sintegracebusca.repository.AgendamentoRepository;
 import com.example.sintegracebusca.util.DateUtil;
@@ -17,6 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
@@ -34,6 +31,7 @@ public class AgendamentoService {
 
     public Agendamento save(AgendamentoDTO agendamentoDTO) {
         var agendamento = mapper.dtoToAgendamento(agendamentoDTO);
+        log.info("agendamento: {}", agendamento);
         return agendamentoRepository.save(agendamento);
     }
 
@@ -42,16 +40,21 @@ public class AgendamentoService {
         LocalDate primeiroDiaPesquisa = DateUtil.getPrimeiroDiaMes(mes);
         LocalDate ultimoDiaPesquisa = DateUtil.getUltimoDiaMes(mes);
 
-        var agendamentoMap = new TreeMap<>(agendamentoRepository.findByDataPagamentoMonth(primeiroDiaPesquisa, ultimoDiaPesquisa)
+        List<Agendamento> agendamentoList = agendamentoRepository.findByDataPagamentoMonth(
+            primeiroDiaPesquisa, ultimoDiaPesquisa
+        );
+
+        List<AgendamentoReturnDTO> agendamentoDTOS = mapper.agendamentosToDtos(agendamentoList);
+        var agendamentoMap = new TreeMap<>(agendamentoDTOS
             .stream()
-            .collect(Collectors.groupingBy(Agendamento::getDataPagamento)));
+            .collect(Collectors.groupingBy(AgendamentoReturnDTO::getDataPagamento)));
 
         var agendamentoTotalDia = new TreeMap<LocalDate, AgendamentoTotalDia>();
 
 
         agendamentoMap.forEach((key, value) -> {
             double somaDoDia = value.stream()
-                .mapToDouble(Agendamento::getValor).sum();
+                .mapToDouble(this::stringToDouble).sum();
             agendamentoTotalDia.put(
                 key,
                 new AgendamentoTotalDia(
@@ -85,5 +88,9 @@ public class AgendamentoService {
         return agendamentoRepository.findById(id)
             .orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.BAD_REQUEST, "Agendamento nao encontrado"));
+    }
+
+    private Double stringToDouble(AgendamentoReturnDTO agendamentoDTO) {
+        return Double.parseDouble(agendamentoDTO.getValor());
     }
 }
