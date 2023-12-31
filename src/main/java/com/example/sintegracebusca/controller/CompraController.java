@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class CompraController {
@@ -48,7 +50,9 @@ public class CompraController {
     @GetMapping("/compras/{id}")
     public String listarPagamentos(Model model, @PathVariable Long id) {
         model.addAttribute("agendamento", AgendamentoDTO.builder().build());
-        model.addAttribute("compra", compraService.findById(id));
+        var compra = compraService.findById(id);
+        model.addAttribute("compra", compra);
+        model.addAttribute("compras", List.of(compra));
         return "compra/compraResult";
     }
 }
