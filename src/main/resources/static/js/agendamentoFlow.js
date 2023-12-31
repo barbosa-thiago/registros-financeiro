@@ -6,17 +6,20 @@ function openModal(li) {
     let month = parseInt(dateParts[1]) - 1;
     let day = parseInt(dateParts[2]);
 
-    document.getElementById('data-ag-modal').value = Intl.DateTimeFormat("fr-FR", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric"
-    }).format(new Date(year, month, day));
+    const dataAgendamento = document.getElementById('data-ag-modal');
+    if (dataAgendamento !== null) {
+        dataAgendamento.value = Intl.DateTimeFormat("fr-FR", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric"
+        }).format(new Date(year, month, day));
+    }
 }
 
 document.addEventListener("DOMContentLoaded", function () {
     let clickableDivs = document.querySelectorAll(".card-agendamento");
 
-    $('.card-agendamento').on('click', function() {
+    $('.card-agendamento').on('click', function () {
         $('#confirma-pagamento-modal').modal('show');
 
         $("#valor-pagamento-confirmacao").val($(this).attr("data-agendamento-valor"));
@@ -49,7 +52,7 @@ function submitChildForm() {
             console.log('Success: agendamento atualizado');
             window.location.reload();
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
             alert('Error: ' + JSON.parse(xhr.responseText).message);
         }
     });
