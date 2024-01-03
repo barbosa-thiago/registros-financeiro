@@ -13,17 +13,23 @@ DB_PORT=
 
 #### Banco de Dados
 
-A aplicação está configurada para conexão com **firebirdSQL** de deve estar acessível com host, porta e credenciais especificados nas <br />
+A aplicação está configurada para conexão com **PostgreSQL** de deve estar acessível com host, porta e credenciais especificados nas <br />
 variáveis de ambiente
-
-É necessário que sejam criadas sequencias no **firebird**, pois o Hibernate nao cria automaticamente para esse banco <br />
-chamada **GEN_CLIENTE_ID, GEN_PAGAMENTO_ID, GEN_COMPRA_ID, GEN_PRODUTO_ID, GEN_AGENDAMENTO_ID**
 
 #### Tecnologias
 
 - Maven
+- Spring boot
 - Hibernate
 - Jsoup
 - Thymeleaf
-- FirebirdSQL
+- PostgreSQL
 - Jquery
+- Flyway
+- Spring Security
+
+#### Subindo a aplicação no docker
+
+Apenas rode o comando ```docker-compose up``` da raiz do projeto
+
+O usuário:password inicial da aplicação é admin:admin 
