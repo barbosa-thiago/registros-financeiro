@@ -5,3 +5,5 @@ spring:
     active: dev
   application:
     name: sintegra-busca
+  jpa:
+    open-in-view: false

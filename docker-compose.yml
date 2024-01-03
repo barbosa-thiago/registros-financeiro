@@ -17,6 +17,7 @@ services:
 
   postgres:
     image: postgres
+    container_name: postgres_controle
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root

@@ -3,9 +3,14 @@
 spring:
   jpa:
     hibernate:
-      ddl-auto: update
-    generate-ddl: true
+      ddl-auto: none
+    generate-ddl: false
     show-sql: true
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    validate-on-migrate: true
 
   datasource:
 #    url: jdbc:firebirdsql:${DB_HOST}/${DB_PORT}:controle.db?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false

@@ -3,8 +3,8 @@
 spring:
   jpa:
     hibernate:
-      ddl-auto: update
-    generate-ddl: true
+      ddl-auto: none
+    generate-ddl: false
     show-sql: true
 
   datasource:
