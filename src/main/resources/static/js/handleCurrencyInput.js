@@ -1,6 +1,3 @@
-$(document).ready(function () {
-    $(".currency-input").val("0,00");
-})
 
 $(document).on("input", ".currency-input", function () {
 
