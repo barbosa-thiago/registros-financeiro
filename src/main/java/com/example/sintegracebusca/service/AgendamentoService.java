@@ -25,6 +25,7 @@ import static java.util.Objects.nonNull;
 public class AgendamentoService {
 
     private final PagamentoService pagamentoService;
+    private final CompraService compraService;
     private final AgendamentoMapper mapper;
 
     private final AgendamentoRepository agendamentoRepository;
@@ -32,6 +33,10 @@ public class AgendamentoService {
     public Agendamento save(AgendamentoDTO agendamentoDTO) {
         var agendamento = mapper.dtoToAgendamento(agendamentoDTO);
         log.info("agendamento: {}", agendamento);
+
+        if(nonNull(agendamentoDTO.getCompraId())) {
+            agendamento.setCompra(compraService.findById(agendamentoDTO.getCompraId()));
+        }
         return agendamentoRepository.save(agendamento);
     }
 

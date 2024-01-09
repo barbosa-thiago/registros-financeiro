@@ -7,6 +7,7 @@ public enum TipoPagamento {
     IMPOSTO,
     TRANSPORTE,
     ALIMENTACAO,
-    OUTROS,
-    AGENDADO
+    AGENDADO,
+    SALARIO,
+    OUTROS
 }

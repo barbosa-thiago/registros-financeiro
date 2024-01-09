@@ -15,7 +15,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface AgendamentoMapper {
 
-    @Mapping(source = "compraId", target = "compra.id")
+    @Mapping(source = "compraId", target = ".", ignore = true)
     @Mapping(source = "valor", target = "valor", qualifiedByName = "valorToDoubleMapper")
     Agendamento dtoToAgendamento(AgendamentoDTO agendamentoDTO);
 
@@ -29,7 +29,7 @@ public interface AgendamentoMapper {
     default double valorMapper(String valor) {
 
         var valorAjustado = valor.replace(",", "");
-        var bigDecimal = BigDecimal.valueOf(Double.valueOf(valorAjustado))
+        var bigDecimal = BigDecimal.valueOf(Double.parseDouble(valorAjustado))
             .setScale(2, RoundingMode.HALF_UP);
 
         return bigDecimal.doubleValue();

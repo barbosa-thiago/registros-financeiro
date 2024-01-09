@@ -4,10 +4,11 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.util.Objects.isNull;
 
 @Getter
 @Setter
@@ -56,6 +57,7 @@ public class Compra extends BaseEntity {
     }
 
     public Boolean getAgendado() {
+        if(isNull(this.agendamentos)) return false;
         return !this.agendamentos.isEmpty();
     }
 
