@@ -2,7 +2,7 @@
     agent any
 
     tools{
-       maven 'localmaven'
+       maven 'maven'
     }
     stages {
         stage('Build') {
